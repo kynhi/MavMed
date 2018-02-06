@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.login.mavmed.data.LoginContract;
 import com.example.login.mavmed.data.LoginDatabaseHelper;
 public class LoginActivity extends Activity {
-    Button login,register;
+    Button login,register, skip;
     EditText username,password;
 
     TextView attempts_count;
@@ -39,12 +39,12 @@ public class LoginActivity extends Activity {
         username = (EditText)findViewById(R.id.Username);
         password = (EditText)findViewById(R.id.Password);
 
+        skip = (Button)findViewById(R.id.Override);
         register = (Button)findViewById(R.id.Register);
         attempts_count = (TextView)findViewById(R.id.Counter);
         attempts_count.setVisibility(View.GONE);
 
         LoginDbHelper = new LoginDatabaseHelper(this);
-
 
         //Adding click listener to log in button.
         login.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +93,7 @@ public class LoginActivity extends Activity {
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                         startActivity(intent);
                     }
+
                     else {
                         Toast.makeText(LoginActivity.this,"UserName or Password is Wrong, Please Try Again.",Toast.LENGTH_LONG).show();
                         attempts_count.setVisibility(View.VISIBLE);
@@ -108,6 +109,17 @@ public class LoginActivity extends Activity {
                 }else{
                     Toast.makeText(LoginActivity.this,"Please Enter UserName or Password.",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Toast.makeText(LoginActivity.this,"Login Skipped",Toast.LENGTH_LONG).show();
+
+                // Going to Dashboard activity after login success message.
+                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent);
             }
         });
 
