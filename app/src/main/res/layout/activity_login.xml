@@ -22,7 +22,7 @@
 
 
     <EditText
-        android:id="@+id/Username"
+        android:id="@+id/Email"
         android:layout_width="219dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
@@ -30,10 +30,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:focusable="true"
-        android:hint="Username"
+        android:hint="Email "
+        android:nextFocusDown="@id/Password"
         android:textColorHighlight="#ff7eff15"
         android:textColorHint="#ffff25e6"
-        android:nextFocusDown="@id/Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
@@ -44,20 +44,20 @@
 
     <EditText
         android:id="@+id/Password"
-        android:layout_width="215dp"
-        android:layout_height="40dp"
+        android:layout_width="222dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#ffff299f"
         android:nextFocusDown="@id/Login"
+        android:textColorHint="#ffff299f"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Username"
+        app:layout_constraintEnd_toEndOf="@+id/Email"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Username"
+        app:layout_constraintStart_toStartOf="@+id/Email"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.47" />
 
