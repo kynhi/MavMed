@@ -18,6 +18,7 @@ public class DashboardActivity extends AppCompatActivity {
     // Creating button.
     Button logout ;
     Button diagnose;
+    Button medicalRecord;
     // Creating FirebaseAuth.
     FirebaseAuth firebaseAuth ;
     // Creating FirebaseUser.
@@ -29,7 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         diagnose = (Button)findViewById(R.id.diag_search);
         logout = (Button) findViewById(R.id.Logout);
-
+        medicalRecord = (Button) findViewById(R.id.MedicalRecord);
         diagnose.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -37,7 +38,13 @@ public class DashboardActivity extends AppCompatActivity {
                                             startActivity(intent);
                                         }
                                     });
-
+        medicalRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, MedicalRecordActivity.class);
+                startActivity(intent);
+            }
+        });
         firebaseAuth =  FirebaseAuth.getInstance();
         // On activity start check whether there is user previously logged in or not.
         if(firebaseAuth.getCurrentUser() == null){

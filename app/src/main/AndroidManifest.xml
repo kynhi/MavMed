@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".DashboardActivity" />
+        <activity android:name=".DiagnosisSearch" />
         <activity android:name=".MedicalRecordActivity" android:exported="true"
             android:label="Medical Record"
             ></activity>
