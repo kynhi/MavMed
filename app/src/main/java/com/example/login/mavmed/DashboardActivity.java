@@ -5,22 +5,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+  
 public class DashboardActivity extends AppCompatActivity {
     // Creating button.
     Button logout ;
+    Button diagnose;
     // Creating FirebaseAuth.
     FirebaseAuth firebaseAuth ;
     // Creating FirebaseUser.
     FirebaseUser firebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        diagnose = (Button)findViewById(R.id.diag_search);
+
+        diagnose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, DiagnosisSearch.class);
+                startActivity(intent);
+
         logout = (Button) findViewById(R.id.Logout);
 
         firebaseAuth =  FirebaseAuth.getInstance();
@@ -57,8 +71,9 @@ public class DashboardActivity extends AppCompatActivity {
 
                 // Showing toast message on logout.
                 Toast.makeText(DashboardActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
-
             }
         });
     }
+
+
 }

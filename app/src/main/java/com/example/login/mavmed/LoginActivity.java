@@ -23,8 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends Activity {
+
     Button login,register;
     EditText email,password;
+
 
     TextView attempts_count;
     int counter = 3;
@@ -51,6 +53,7 @@ public class LoginActivity extends Activity {
         email = (EditText)findViewById(R.id.Email);
         password = (EditText)findViewById(R.id.Password);
 
+        skip = (Button)findViewById(R.id.Override);
         register = (Button)findViewById(R.id.Register);
         attempts_count = (TextView)findViewById(R.id.Counter);
         attempts_count.setVisibility(View.GONE);
@@ -108,6 +111,7 @@ public class LoginActivity extends Activity {
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                         startActivity(intent);
                     }
+
                     else {
                         Toast.makeText(LoginActivity.this,"UserName or Password is Wrong, Please Try Again.",Toast.LENGTH_LONG).show();
                         attempts_count.setVisibility(View.VISIBLE);
@@ -127,6 +131,17 @@ public class LoginActivity extends Activity {
             }
             }
         );
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Toast.makeText(LoginActivity.this,"Login Skipped",Toast.LENGTH_LONG).show();
+
+                // Going to Dashboard activity after login success message.
+                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
