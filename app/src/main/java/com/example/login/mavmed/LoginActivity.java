@@ -1,11 +1,13 @@
 package com.example.login.mavmed;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -15,20 +17,32 @@ import android.widget.Toast;
 
 import com.example.login.mavmed.data.LoginContract;
 import com.example.login.mavmed.data.LoginDatabaseHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends Activity {
-    Button login,register, skip;
-    EditText username,password;
+
+    Button login,register;
+    EditText email,password;
+
 
     TextView attempts_count;
     int counter = 3;
     private SQLiteDatabase myDb; //my Database
 
-    String usernameHolder, passwordHolder;
+    String EmailHolder, PasswordHolder;
     Boolean EditTextEmptyHolder;
     SQLiteDatabase LoginDatabase;
     LoginDatabaseHelper LoginDbHelper;
     Cursor cursor;
     String TempPassword = "NOT_FOUND" ;
+    // Creating progress dialog.
+    ProgressDialog progressDialog;
+
+    // Creating FirebaseAuth object.
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +50,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         login = (Button)findViewById(R.id.Login);
-        username = (EditText)findViewById(R.id.Username);
+        email = (EditText)findViewById(R.id.Email);
         password = (EditText)findViewById(R.id.Password);
 
         skip = (Button)findViewById(R.id.Override);
@@ -45,32 +59,36 @@ public class LoginActivity extends Activity {
         attempts_count.setVisibility(View.GONE);
 
         LoginDbHelper = new LoginDatabaseHelper(this);
+        progressDialog =  new ProgressDialog(LoginActivity.this);
+
+        // Assign FirebaseAuth instance to FirebaseAuth object.
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Adding click listener to log in button.
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                usernameHolder = username.getText().toString();
-                passwordHolder = password.getText().toString();
+                EmailHolder = email.getText().toString();
+                PasswordHolder = password.getText().toString();
                 // Checking EditText is empty or no using TextUtils.
-                if(TextUtils.isEmpty(usernameHolder) || TextUtils.isEmpty(passwordHolder)){
+                if (TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)) {
 
-                    EditTextEmptyHolder = false ;
+                    EditTextEmptyHolder = false;
 
-                }
-                else {
+                } else {
 
-                    EditTextEmptyHolder = true ;
+                    EditTextEmptyHolder = true;
                 }
 
                 if (EditTextEmptyHolder) {
 
+/*
                     LoginDatabase = LoginDbHelper.getWritableDatabase();
 
                     // Adding search username query to cursor.
-                    cursor = LoginDatabase.query(LoginContract.LoginEntry.TABLE_NAME, null, " " +
-                            LoginContract.LoginEntry.COLUMN_USERNAME + "=?", new String[]{usernameHolder}, null, null, null);
+                    //cursor = LoginDatabase.query(LoginContract.LoginEntry.TABLE_NAME, null, " " +
+                    //        LoginContract.LoginEntry.COLUMN_USERNAME + "=?", new String[]{emailHolder}, null, null, null);
                     while (cursor.moveToNext()) {
 
                         if (cursor.isFirst()) {
@@ -105,12 +123,14 @@ public class LoginActivity extends Activity {
                             login.setEnabled(false);
                         }
                     }
-                    TempPassword = "NOT_FOUND" ;
-                }else{
-                    Toast.makeText(LoginActivity.this,"Please Enter UserName or Password.",Toast.LENGTH_LONG).show();
+                    TempPassword = "NOT_FOUND" ;*/
+                    LoginFunction();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Please Enter UserName or Password.", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+            }
+        );
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,12 +145,53 @@ public class LoginActivity extends Activity {
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
                 // Opening new user registration activity using intent on button click.
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
-        });
+        }
+        );
     }
+    // Creating login function.
+    public void LoginFunction(){
 
+        // Setting up message in progressDialog.
+        progressDialog.setMessage("Please Wait");
+
+        // Showing progressDialog.
+        progressDialog.show();
+
+        // Calling  signInWithEmailAndPassword function with firebase object and passing EmailHolder and PasswordHolder inside it.
+        firebaseAuth.signInWithEmailAndPassword(EmailHolder, PasswordHolder)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // If task done Successful.
+                        if(task.isSuccessful()){
+
+                            // Hiding the progress dialog.
+                            progressDialog.dismiss();
+
+                            // Closing the current Login Activity.
+                            finish();
+
+
+                            // Opening the UserProfileActivity.
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+
+                            // Hiding the progress dialog.
+                            progressDialog.dismiss();
+
+                            // Showing toast message when email or password not found in Firebase Online database.
+                            Toast.makeText(LoginActivity.this, "Email or Password Not found, Please Try Again", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+    }
 }
