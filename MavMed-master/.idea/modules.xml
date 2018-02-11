@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:\Users\Bobby Kemp\CloudStation\#uta_17-18\CSE 3310\New_MavMed\MavMed-master\MavMed.iml" filepath="C:\Users\Bobby Kemp\CloudStation\#uta_17-18\CSE 3310\New_MavMed\MavMed-master\MavMed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MavMed-master.iml" filepath="$PROJECT_DIR$/MavMed-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
