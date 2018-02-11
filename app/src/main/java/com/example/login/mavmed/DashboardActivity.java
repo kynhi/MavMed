@@ -28,14 +28,15 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         diagnose = (Button)findViewById(R.id.diag_search);
+        logout = (Button) findViewById(R.id.Logout);
 
         diagnose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, DiagnosisSearch.class);
-                startActivity(intent);
-
-        logout = (Button) findViewById(R.id.Logout);
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(DashboardActivity.this, DiagnosisSearch.class);
+                                            startActivity(intent);
+                                        }
+                                    });
 
         firebaseAuth =  FirebaseAuth.getInstance();
         // On activity start check whether there is user previously logged in or not.
@@ -74,6 +75,4 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

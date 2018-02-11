@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends Activity {
 
-    Button login,register;
+    Button login,register,skip;
     EditText email,password;
 
 
