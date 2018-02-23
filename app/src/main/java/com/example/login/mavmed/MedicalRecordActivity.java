@@ -89,14 +89,14 @@ public class MedicalRecordActivity extends AppCompatActivity {
                     }
                 });
 
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        dialog.dismiss();
                     }
                 });
-                mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
                 dialog.show();
             }
         });

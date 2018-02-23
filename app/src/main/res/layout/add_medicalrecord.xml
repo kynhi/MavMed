@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:text="Allergies"
             android:onClick="checkButton"
-            android:checked="true"
             />
         <RadioButton
             android:id="@+id/radio_immune"
