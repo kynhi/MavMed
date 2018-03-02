@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends Activity {
 
@@ -56,7 +57,7 @@ public class LoginActivity extends Activity {
         skip = (Button)findViewById(R.id.Override);
         register = (Button)findViewById(R.id.Register);
         attempts_count = (TextView)findViewById(R.id.Counter);
-        attempts_count.setVisibility(View.GONE);
+        attempts_count.setText(Integer.toString(counter));
 
         LoginDbHelper = new LoginDatabaseHelper(this);
         progressDialog =  new ProgressDialog(LoginActivity.this);
@@ -169,18 +170,21 @@ public class LoginActivity extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         // If task done Successful.
-                        if(task.isSuccessful()){
+                        if(task.isSuccessful()) {
 
                             // Hiding the progress dialog.
                             progressDialog.dismiss();
-
-                            // Closing the current Login Activity.
-                            finish();
-
-
-                            // Opening the UserProfileActivity.
-                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                            startActivity(intent);
+                            FirebaseAuth auth = FirebaseAuth.getInstance();
+                            FirebaseUser user = auth.getCurrentUser();
+                            if (user.isEmailVerified() == true){
+                                // Closing the current Login Activity.
+                                finish();
+                                // Opening the UserProfileActivity.
+                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                             } else{
+                                Toast.makeText(LoginActivity.this, "Your Email is not verified please check your email for verification email from us", Toast.LENGTH_LONG).show();
+                            }
                         }
                         else {
 
@@ -189,6 +193,14 @@ public class LoginActivity extends Activity {
 
                             // Showing toast message when email or password not found in Firebase Online database.
                             Toast.makeText(LoginActivity.this, "Email or Password Not found, Please Try Again", Toast.LENGTH_LONG).show();
+                            attempts_count.setVisibility(View.VISIBLE);
+                            attempts_count.setBackgroundColor(Color.RED);
+                            counter--;
+                            attempts_count.setText(Integer.toString(counter));
+                            if (counter == 0){
+                                login.setEnabled(false);
+                                Toast.makeText(LoginActivity.this, "You have no attempt left", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });
