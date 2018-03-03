@@ -1,4 +1,4 @@
-package com.example.login.mavmed;
+package com.example.login.mavmed.activity;
 
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.example.login.mavmed.R;
+import com.example.login.mavmed.adapter.ExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

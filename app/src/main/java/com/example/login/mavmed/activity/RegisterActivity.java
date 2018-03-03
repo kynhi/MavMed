@@ -1,30 +1,30 @@
-package com.example.login.mavmed;
+package com.example.login.mavmed.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.login.mavmed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.example.login.mavmed.data.LoginContract.*;
-import com.example.login.mavmed.data.LoginDatabaseHelper;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText Email, Password, Name ;
     Button Register;
     String NameHolder, EmailHolder, PasswordHolder;
     Boolean EditTextEmptyHolder;
+    final String TAG = "MavMed";
     //SQLiteDatabase LoginDatabase;
     //String SQLiteDataBaseQueryHolder ;
     //LoginDatabaseHelper LoginDbHelper;
@@ -202,14 +202,27 @@ public class RegisterActivity extends AppCompatActivity {
                         // Checking if user is registered successfully.
                         if (task.isSuccessful()) {
                             // Printing toast message after done inserting.
-                            Toast.makeText(RegisterActivity.this,"User Registered Successfully", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(RegisterActivity.this, DashboardActivity.class);
-                            startActivity(intent);
+                            Toast.makeText(RegisterActivity.this,"User Registered Successfully, Check Email for Confirmation", Toast.LENGTH_LONG).show();
 
+                            FirebaseAuth auth = FirebaseAuth.getInstance();
+                            FirebaseUser user = auth.getCurrentUser();
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "Email sent.");
+                                            }
+                                        }
+                                    });
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
                         } else {
 
                             // If something goes wrong.
-                            Toast.makeText(RegisterActivity.this, "You already register with the email please try sign in.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "You already register with the email please try sign in with Email and Password.", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
                         }
 
                         // Hiding the progress dialog after all task complete.

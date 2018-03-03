@@ -1,12 +1,1 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.idea/vcs.xml
-MavMed/
-app/src/main/res/layout/activity_login.xml
+
