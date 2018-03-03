@@ -10,22 +10,22 @@
         android:label="MavMed"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        android:theme="@style/MyMaterialTheme">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".DiagnosisSearch" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.DashboardActivity" />
+        <activity android:name=".activity.DiagnosisSearchFragment" />
         <activity
-            android:name=".MedicalRecordActivity"
+            android:name=".activity.MedicalRecordActivity"
             android:exported="true"
             android:label="Medical Record" />
-        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".activity.UserProfileActivity"></activity>
     </application>
 
 </manifest>
