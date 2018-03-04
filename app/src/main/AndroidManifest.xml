@@ -21,6 +21,7 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.DiagnosisSearchFragment" />
+        <activity android:name=".activity.MainActivity"/>
         <activity
             android:name=".activity.MedicalRecordActivity"
             android:exported="true"

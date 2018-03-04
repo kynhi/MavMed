@@ -22,7 +22,14 @@ android {
         exclude 'META-INF/NOTICE'
 
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/values-v21'] } }
+    sourceSets { main
+            { res.srcDirs = ['src/main/res', 'src/main/res/values-v21']
+                java {
+                    exclude '**/DashboardActivity.java'
+                }
+            }
+
+    }
 }
 
 dependencies {

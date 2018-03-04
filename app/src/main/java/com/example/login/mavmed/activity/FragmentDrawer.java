@@ -1,25 +1,6 @@
 package com.example.login.mavmed.activity;
 
 import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import com.example.login.mavmed.adapter.NavigationDrawerAdapter;
-import com.example.login.mavmed.R;
-import com.example.login.mavmed.model.NavDrawerItem;
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentDrawer.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentDrawer#newInstance} factory method to
- * create an instance of this fragment.
- */
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -32,6 +13,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.login.mavmed.R;
+import com.example.login.mavmed.adapter.NavigationDrawerAdapter;
+import com.example.login.mavmed.model.NavDrawerItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,4 +178,3 @@ public class FragmentDrawer extends Fragment {
         public void onDrawerItemSelected(View view, int position);
     }
 }
-

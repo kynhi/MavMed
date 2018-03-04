@@ -139,7 +139,7 @@ public class LoginActivity extends Activity {
                Toast.makeText(LoginActivity.this,"Login Skipped",Toast.LENGTH_LONG).show();
 
                 // Going to Dashboard activity after login success message.
-                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -180,7 +180,7 @@ public class LoginActivity extends Activity {
                                 // Closing the current Login Activity.
                                 finish();
                                 // Opening the UserProfileActivity.
-                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                              } else{
                                 Toast.makeText(LoginActivity.this, "Your Email is not verified please check your email for verification email from us", Toast.LENGTH_LONG).show();
