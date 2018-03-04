@@ -91,9 +91,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_diagnosissearch);
                 break;
             case 2:
-                //fragment = new MessagesFragment();
-                title = getString(R.string.title_messages);
+                fragment = new MedicalRecordFragment();
+                title = getString(R.string.title_medical_record);
                 break;
+            case 3:
+                fragment = new UserProfileFragment();
+                title= getString(R.string.title_user_profile);
             default:
                 break;
         }

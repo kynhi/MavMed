@@ -9,7 +9,7 @@
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
-    tools:context="com.example.login.mavmed.activity.MedicalRecordActivity">
+    tools:context="com.example.login.mavmed.activity.MedicalRecordFragment">
     
     <ExpandableListView
         android:id="@+id/lvExp"
@@ -25,7 +25,5 @@
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="24dp"
         android:text="Add" />
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+
 </RelativeLayout>
