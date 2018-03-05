@@ -19,14 +19,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.DiagnosisSearchFragment" />
         <activity android:name=".activity.MainActivity"/>
         <activity
-            android:name=".activity.MedicalRecordActivity"
+            android:name=".activity.MedicalRecordFragment"
             android:exported="true"
             android:label="Medical Record" />
-        <activity android:name=".activity.UserProfileActivity"></activity>
+        <activity android:name=".activity.UserProfileFragment"></activity>
     </application>
 
 </manifest>

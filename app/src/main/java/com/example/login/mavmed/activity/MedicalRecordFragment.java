@@ -1,9 +1,13 @@
 package com.example.login.mavmed.activity;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -19,7 +23,7 @@ import java.util.List;
 
 
 
-public class MedicalRecordActivity extends AppCompatActivity {
+public class MedicalRecordFragment extends Fragment {
 
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
@@ -27,13 +31,22 @@ public class MedicalRecordActivity extends AppCompatActivity {
     private HashMap<String,List<String>> listHash;
 
     int category;
-
+    public MedicalRecordFragment() {
+        // Required empty public constructor
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_record);
 
-        listView = (ExpandableListView)findViewById(R.id.lvExp);
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // this code is equal set content view in onCreate() method
+        View rootView = inflater.inflate(R.layout.fragment_medical_record, container, false);
+
+        listView = (ExpandableListView)rootView.findViewById(R.id.lvExp);
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
@@ -55,14 +68,14 @@ public class MedicalRecordActivity extends AppCompatActivity {
         med.add("cookies");
 
 
-        listAdapter = new ExpandableListAdapter(this,listDataHeader,listHash);
+        listAdapter = new ExpandableListAdapter(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
 
-        final Button mShowDialog = (Button) findViewById(R.id.button_addMR);
+        final Button mShowDialog = (Button) rootView.findViewById(R.id.button_addMR);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MedicalRecordActivity.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                 View mView = getLayoutInflater().inflate(R.layout.add_medicalrecord, null);
                 final EditText inputname = (EditText) mView.findViewById(R.id.et_MRtext);
                 final Button addconfirm = (Button) mView.findViewById(R.id.button_addMR_dialog);
@@ -73,19 +86,19 @@ public class MedicalRecordActivity extends AppCompatActivity {
                     public void onClick(View view) {
 
                         if (!inputname.getText().toString().isEmpty() && category == 0) {
-                            Toast.makeText(MedicalRecordActivity.this,
+                            Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             allergies.add(inputname.getText().toString());
                         } else if (!inputname.getText().toString().isEmpty() && category == 1) {
-                            Toast.makeText(MedicalRecordActivity.this,
+                            Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             immune.add(inputname.getText().toString());
                         } else if (!inputname.getText().toString().isEmpty() && category == 2) {
-                            Toast.makeText(MedicalRecordActivity.this,
+                            Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             med.add(inputname.getText().toString());
                         } else {
-                            Toast.makeText(MedicalRecordActivity.this,
+                            Toast.makeText(getActivity(),
                                     "Please Fill in Empty Field", Toast.LENGTH_LONG).show();
 
                         }
@@ -104,7 +117,21 @@ public class MedicalRecordActivity extends AppCompatActivity {
             }
         });
 
+
+        // Inflate the layout for this fragment
+        return rootView;
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
     public void checkButton(View view) {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {

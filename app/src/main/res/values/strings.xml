@@ -6,18 +6,26 @@
     <string name="drawer_close">Close</string>
 
     <string name="nav_item_home">Home</string>
-    <string name="nav_item_diagnosissearch">Diagnosis Search</string>
+    <string name="nav_item_diagnosis_search">Diagnosis Search</string>
+    <string name="nav_item_medical_record">Medical Record</string>
+    <string name="nav_item_user_profile">User Profile</string>
     <string name="nav_item_notifications">Messages</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
-        <item>@string/nav_item_diagnosissearch</item>
+        <item>@string/nav_item_diagnosis_search</item>
+        <item>@string/nav_item_medical_record</item>
+        <item>@string/nav_item_user_profile</item>
         <item>@string/nav_item_notifications</item>
+
     </string-array>
 
-    <string name="title_messages">Messages</string>
+    <string name="title_medical_record">Medical Record</string>
     <string name="title_diagnosissearch">Diagnosis Search</string>
+    <string name="title_user_profile">Profile</string>
+    <string name="title_message">Message</string>
+
     <string name="title_home">Home</string>
 
     <!-- TODO: Remove or change this placeholder text -->
