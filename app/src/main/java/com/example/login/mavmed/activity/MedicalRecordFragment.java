@@ -120,6 +120,7 @@ public class MedicalRecordFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+
     }
 
     @Override
@@ -132,21 +133,5 @@ public class MedicalRecordFragment extends Fragment {
         super.onDetach();
     }
 
-    public void checkButton(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.radio_allergies:
-                if (checked)
-                    category = 0;
-                    break;
-            case R.id.radio_immune:
-                if (checked)
-                    category = 1;
-                break;
-            case R.id.radio_med:
-                if (checked)
-                    category = 2;
-                break;
-        }
-    }
+
 }
