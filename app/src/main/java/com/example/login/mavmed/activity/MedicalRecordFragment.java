@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,8 @@ public class MedicalRecordFragment extends Fragment {
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
+    int category=0;
 
-    int category;
     public MedicalRecordFragment() {
         // Required empty public constructor
     }
@@ -75,16 +76,19 @@ public class MedicalRecordFragment extends Fragment {
         mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                 View mView = getLayoutInflater().inflate(R.layout.add_medicalrecord, null);
                 final EditText inputname = (EditText) mView.findViewById(R.id.et_MRtext);
                 final Button addconfirm = (Button) mView.findViewById(R.id.button_addMR_dialog);
-                final Button cancel = (Button) mView.findViewById(R.id.button_cancel_MR_dialog);
-//adding all the input and process
+                final Button cancel = (Button) mView.findViewById(R.id.button_cancel_MR_dialog);//adding all the input and process
                 addconfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        // get catogory variable from Main Activity
+                        MainActivity activity = (MainActivity) getActivity();
+                        category = activity.getCategory();
+                        Log.d("MEdicalRecordFragment","Category" + Integer.toString(category));
                         if (!inputname.getText().toString().isEmpty() && category == 0) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
@@ -100,11 +104,9 @@ public class MedicalRecordFragment extends Fragment {
                         } else {
                             Toast.makeText(getActivity(),
                                     "Please Fill in Empty Field", Toast.LENGTH_LONG).show();
-
                         }
                     }
                 });
-
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 cancel.setOnClickListener(new View.OnClickListener() {
@@ -120,33 +122,17 @@ public class MedicalRecordFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
     }
 
-    public void checkButton(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.radio_allergies:
-                if (checked)
-                    category = 0;
-                    break;
-            case R.id.radio_immune:
-                if (checked)
-                    category = 1;
-                break;
-            case R.id.radio_med:
-                if (checked)
-                    category = 2;
-                break;
-        }
-    }
+
 }

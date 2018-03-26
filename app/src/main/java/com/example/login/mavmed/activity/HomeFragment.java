@@ -4,10 +4,14 @@ package com.example.login.mavmed.activity;
  * Created by Nhi K luong on 3/3/2018.
  */
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,15 +55,36 @@ public class HomeFragment extends Fragment {
         diagnose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DiagnosisSearchFragment.class);
-                startActivity(intent);
+                Fragment fragment = null;
+
+                fragment = new DiagnosisSearchFragment();
+                String title = getString(R.string.title_diagnosissearch);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+
+                // set the toolbar title
+
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
+
             }
         });
         medicalRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MedicalRecordFragment.class);
-                startActivity(intent);
+                Fragment fragment = null;
+                String title = getString(R.string.app_name);
+                fragment = new MedicalRecordFragment();
+                title = getString(R.string.title_medical_record);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+                // set the toolbar title
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
             }
         });
         firebaseAuth =  FirebaseAuth.getInstance();
