@@ -93,14 +93,25 @@ public class MedicalRecordFragment extends Fragment {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             allergies.add(inputname.getText().toString());
+                            inputname.setText(null); // reset input text after sucessfully added
+                            activity.resetCategory(); // reset input radio
+                            listAdapter.notifyDataSetChanged(); //refresh the list view data
+
                         } else if (!inputname.getText().toString().isEmpty() && category == 1) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             immune.add(inputname.getText().toString());
+                            inputname.setText(null);
+                            activity.resetCategory();
+                            listAdapter.notifyDataSetChanged();
+
                         } else if (!inputname.getText().toString().isEmpty() && category == 2) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             med.add(inputname.getText().toString());
+                            inputname.setText(null);
+                            activity.resetCategory();
+                            listAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(),
                                     "Please Fill in Empty Field", Toast.LENGTH_LONG).show();
