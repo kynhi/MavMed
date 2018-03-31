@@ -1,6 +1,7 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +73,15 @@ public class MedicalRecordFragment extends Fragment {
         listAdapter = new ExpandableListAdapter(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
 
+        Button clear = (Button) rootView.findViewById(R.id.button_clearMR);
+        clear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                allergies.clear();
+                immune.clear();
+                med.clear();
+                listAdapter.notifyDataSetChanged();
+            }
+        });
         final Button mShowDialog = (Button) rootView.findViewById(R.id.button_addMR);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +104,6 @@ public class MedicalRecordFragment extends Fragment {
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             allergies.add(inputname.getText().toString());
                             inputname.setText(null); // reset input text after sucessfully added
-                            activity.resetCategory(); // reset input radio
                             listAdapter.notifyDataSetChanged(); //refresh the list view data
 
                         } else if (!inputname.getText().toString().isEmpty() && category == 1) {
@@ -102,7 +111,6 @@ public class MedicalRecordFragment extends Fragment {
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             immune.add(inputname.getText().toString());
                             inputname.setText(null);
-                            activity.resetCategory();
                             listAdapter.notifyDataSetChanged();
 
                         } else if (!inputname.getText().toString().isEmpty() && category == 2) {
@@ -110,7 +118,6 @@ public class MedicalRecordFragment extends Fragment {
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             med.add(inputname.getText().toString());
                             inputname.setText(null);
-                            activity.resetCategory();
                             listAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(),
@@ -123,6 +130,8 @@ public class MedicalRecordFragment extends Fragment {
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        MainActivity activity = (MainActivity) getActivity();
+                        activity.resetCategory(); // reset input radio
                         dialog.dismiss();
                     }
                 });
