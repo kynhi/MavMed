@@ -1,6 +1,7 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
