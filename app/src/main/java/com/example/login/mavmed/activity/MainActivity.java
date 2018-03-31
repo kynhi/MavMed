@@ -11,11 +11,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
@@ -23,7 +21,7 @@ import com.example.login.mavmed.R;
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
     private static String TAG = MainActivity.class.getSimpleName();
-    int category  = -1;
+
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
 
@@ -45,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         // display the first navigation drawer view on app launch
         displayView(0);
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,33 +105,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
     }
-    public void checkButton(View view) {
-
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.radio_allergies:
-                if (checked)
-                    category = 0;
-                break;
-            case R.id.radio_immune:
-                if (checked)
-                    category = 1;
-                break;
-            case R.id.radio_med:
-                if (checked)
-                    category = 2;
-                break;
-        }
-    }
-    public int getCategory() {
-        return category;
-    }
-    public void resetCategory() {category = -1;}
 }
