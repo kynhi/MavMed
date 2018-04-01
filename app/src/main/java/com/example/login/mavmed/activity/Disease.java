@@ -3,7 +3,14 @@ package com.example.login.mavmed.activity;
 import java.util.ArrayList;
 
 /*Disease class definition*/
-class Disease{
+public class Disease extends ArrayList<String>{
+    public boolean does_have(Object o) {
+        String paramStr = (String)o;
+        for (String s : this) {
+            if (paramStr.equalsIgnoreCase(s)) return true;
+        }
+        return false;
+    }
     public Disease(String name, ArrayList<String> list) {
         this.name = name;
         this.symptoms = list;
