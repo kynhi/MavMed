@@ -175,10 +175,6 @@ public class DiagnosisSearchFragment extends Fragment {
                     if(dis.query(symptom)) //tells us if the disease has this symptom
                     {
                         ++count;
-//                        diseaseList.append(dis.name + "\n");
-//                        diseaseList.append("Having symptoms: ");
-//                        diseaseList.append(dis.symptoms.toString());
-//                        diseaseList.append("\n");
                         listDataHeader.add(dis.name);
                         final List<String> list = new ArrayList<>();
                         listHash.put(listDataHeader.get(count),list);

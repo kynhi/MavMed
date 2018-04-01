@@ -30,8 +30,8 @@
       <file leaf-file-name="DiagnosisSearchFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/login/mavmed/activity/DiagnosisSearchFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2125">
-              <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+            <state relative-caret-position="275">
+              <caret line="176" column="32" lean-forward="false" selection-start-line="176" selection-start-column="32" selection-end-line="176" selection-end-column="32" />
               <folding>
                 <element signature="e#3203#3211#0" expanded="true" />
                 <element signature="e#3493#3501#0" expanded="true" />
@@ -42,8 +42,8 @@
                 <element signature="e#4899#4907#0" expanded="true" />
                 <element signature="e#5216#5224#0" expanded="true" />
                 <element signature="e#5967#5976#0" expanded="true" />
-                <element signature="e#6267#7688#0" expanded="true" />
-                <element signature="e#7687#7688#0" expanded="true" />
+                <element signature="e#6267#7435#0" expanded="true" />
+                <element signature="e#7434#7435#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2218,7 +2218,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522602139369" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522602295438" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2318,7 +2318,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522602139369" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522602295439" />
       </method>
     </configuration>
     <list size="1">
@@ -2373,7 +2373,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18689582" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18689582" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2412,16 +2412,16 @@
             <element signature="e#4899#4907#0" expanded="true" />
             <element signature="e#5216#5224#0" expanded="true" />
             <element signature="e#5967#5976#0" expanded="true" />
-            <element signature="e#6267#7688#0" expanded="true" />
-            <element signature="e#7687#7688#0" expanded="true" />
+            <element signature="e#6267#7435#0" expanded="true" />
+            <element signature="e#7434#7435#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/login/mavmed/activity/DiagnosisSearchFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2125">
-          <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+        <state relative-caret-position="275">
+          <caret line="176" column="32" lean-forward="false" selection-start-line="176" selection-start-column="32" selection-end-line="176" selection-end-column="32" />
           <folding>
             <element signature="e#3203#3211#0" expanded="true" />
             <element signature="e#3493#3501#0" expanded="true" />
@@ -2432,8 +2432,8 @@
             <element signature="e#4899#4907#0" expanded="true" />
             <element signature="e#5216#5224#0" expanded="true" />
             <element signature="e#5967#5976#0" expanded="true" />
-            <element signature="e#6267#7688#0" expanded="true" />
-            <element signature="e#7687#7688#0" expanded="true" />
+            <element signature="e#6267#7435#0" expanded="true" />
+            <element signature="e#7434#7435#0" expanded="true" />
           </folding>
         </state>
       </provider>
