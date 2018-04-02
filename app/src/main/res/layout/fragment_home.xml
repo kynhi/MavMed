@@ -33,7 +33,7 @@
         android:layout_height="40dp"
         android:layout_below="@+id/MedicalRecord"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="92dp"
         android:text="Log Out" />
 
     <Button
@@ -44,5 +44,14 @@
         android:layout_alignEnd="@+id/diag_search"
         android:layout_centerVertical="true"
         android:text="Medical Record" />
+
+    <Button
+        android:id="@+id/db_man"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MedicalRecord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Open Database Manager" />
 
 </RelativeLayout>

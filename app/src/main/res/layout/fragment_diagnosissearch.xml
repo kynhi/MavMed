@@ -1,34 +1,49 @@
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    tools:context="com.example.login.mavmed.activity.DiagnosisSearchFragment">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="130dp"
-        android:ems="10"
-        android:hint="Edit message"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="320dp" />
-
-    <Button
-        android:id="@+id/button3"
+    <CheckBox android:id="@+id/checkbox_cough"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="213dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="390dp" />
+        android:text="@string/cough"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_headache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/headache"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_flumps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/torn_flumps"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_diarrhea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/diarrhea"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_indigestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/indigestion"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_gloop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pulled_gloop"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_heartburn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heartburn"
+        android:onClick="onCheckboxClicked"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/senddiagsearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send" />
+
+</LinearLayout>

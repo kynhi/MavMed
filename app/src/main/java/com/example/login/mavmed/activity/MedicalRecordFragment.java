@@ -1,12 +1,10 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
-
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +29,8 @@ public class MedicalRecordFragment extends Fragment {
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
-    int category=0;
 
+    int category;
     public MedicalRecordFragment() {
         // Required empty public constructor
     }
@@ -49,6 +47,8 @@ public class MedicalRecordFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_medical_record, container, false);
 
         listView = (ExpandableListView)rootView.findViewById(R.id.lvExp);
+
+        //---------------
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
@@ -68,70 +68,50 @@ public class MedicalRecordFragment extends Fragment {
         immune.add("Bugs");
         med.add("icecream");
         med.add("cookies");
-
+        //---------------
 
         listAdapter = new ExpandableListAdapter(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
 
-        Button clear = (Button) rootView.findViewById(R.id.button_clearMR);
-        clear.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                allergies.clear();
-                immune.clear();
-                med.clear();
-                listAdapter.notifyDataSetChanged();
-            }
-        });
         final Button mShowDialog = (Button) rootView.findViewById(R.id.button_addMR);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                 View mView = getLayoutInflater().inflate(R.layout.add_medicalrecord, null);
                 final EditText inputname = (EditText) mView.findViewById(R.id.et_MRtext);
                 final Button addconfirm = (Button) mView.findViewById(R.id.button_addMR_dialog);
-                final Button cancel = (Button) mView.findViewById(R.id.button_cancel_MR_dialog);//adding all the input and process
+                final Button cancel = (Button) mView.findViewById(R.id.button_cancel_MR_dialog);
+//adding all the input and process
                 addconfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // get catogory variable from Main Activity
-                        MainActivity activity = (MainActivity) getActivity();
-                        category = activity.getCategory();
-                        Log.d("MEdicalRecordFragment","Category" + Integer.toString(category));
+
                         if (!inputname.getText().toString().isEmpty() && category == 0) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             allergies.add(inputname.getText().toString());
-                            inputname.setText(null); // reset input text after sucessfully added
-                            listAdapter.notifyDataSetChanged(); //refresh the list view data
-
                         } else if (!inputname.getText().toString().isEmpty() && category == 1) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             immune.add(inputname.getText().toString());
-                            inputname.setText(null);
-                            listAdapter.notifyDataSetChanged();
-
                         } else if (!inputname.getText().toString().isEmpty() && category == 2) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             med.add(inputname.getText().toString());
-                            inputname.setText(null);
-                            listAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(),
                                     "Please Fill in Empty Field", Toast.LENGTH_LONG).show();
+
                         }
                     }
                 });
+
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity activity = (MainActivity) getActivity();
-                        activity.resetCategory(); // reset input radio
                         dialog.dismiss();
                     }
                 });
@@ -142,17 +122,33 @@ public class MedicalRecordFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
-
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
     }
 
-
+    public void checkButton(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch(view.getId()) {
+            case R.id.radio_allergies:
+                if (checked)
+                    category = 0;
+                    break;
+            case R.id.radio_immune:
+                if (checked)
+                    category = 1;
+                break;
+            case R.id.radio_med:
+                if (checked)
+                    category = 2;
+                break;
+        }
+    }
 }

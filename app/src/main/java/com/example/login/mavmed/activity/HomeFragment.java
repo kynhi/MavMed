@@ -4,7 +4,6 @@ package com.example.login.mavmed.activity;
  * Created by Nhi K luong on 3/3/2018.
  */
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +27,7 @@ public class HomeFragment extends Fragment {
     Button logout ;
     Button diagnose;
     Button medicalRecord;
+    Button db_man;
 
     private FragmentDrawer drawerFragment; //Fragment
     // Creating FirebaseAuth.
@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
 
         diagnose = (Button) rootView.findViewById(R.id.diag_search);
         logout = (Button) rootView.findViewById(R.id.Logout);
+        db_man = (Button) rootView.findViewById(R.id.db_man);
         medicalRecord = (Button) rootView.findViewById(R.id.MedicalRecord);
         diagnose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,18 +76,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = null;
-                String title = getString(R.string.app_name);
+
                 fragment = new MedicalRecordFragment();
-                title = getString(R.string.title_medical_record);
+                String title = getString(R.string.title_medical_record);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
                 fragmentTransaction.commit();
+
                 // set the toolbar title
+
                 ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
             }
         });
+
         firebaseAuth =  FirebaseAuth.getInstance();
         // On activity start check whether there is user previously logged in or not.
         if(firebaseAuth.getCurrentUser() == null){
