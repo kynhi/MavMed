@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.login.mavmed">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -26,6 +27,10 @@
             android:exported="true"
             android:label="Medical Record" />
         <activity android:name=".activity.UserProfileFragment"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBgS029Ll9mbxJAYhx1ryYHa2mO6WMaqlM"/>
+
     </application>
 
 </manifest>

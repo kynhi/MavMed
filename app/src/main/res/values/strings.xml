@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MedHelper</string>
+    <string name="app_name">MavMed</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
     <string name="drawer_open">Open</string>
@@ -10,6 +10,7 @@
     <string name="nav_item_medical_record">Medical Record</string>
     <string name="nav_item_user_profile">User Profile</string>
     <string name="nav_item_notifications">Messages</string>
+    <string name="nav_item_make_appointment">Make Appointment</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -18,16 +19,17 @@
         <item>@string/nav_item_medical_record</item>
         <item>@string/nav_item_user_profile</item>
         <item>@string/nav_item_notifications</item>
-
+        <item>@string/nav_item_make_appointment</item>
     </string-array>
+
 
     <string name="title_medical_record">Medical Record</string>
     <string name="title_diagnosissearch">Diagnosis Search</string>
     <string name="title_user_profile">Profile</string>
     <string name="title_message">Message</string>
     <string name="title_database_mananger">Database Manager</string>
-
     <string name="title_home">Home</string>
+    <string name="title_make_appointment">Make Appointment</string>
 
     <string name="headache">headache</string>
     <string name="cough">cough</string>

@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeFragment extends Fragment {
     Button logout ;
     Button diagnose;
-    Button medicalRecord;
+    Button medicalRecord, makeAppointment;
     Button db_man;
 
     private FragmentDrawer drawerFragment; //Fragment
@@ -53,6 +53,7 @@ public class HomeFragment extends Fragment {
         logout = (Button) rootView.findViewById(R.id.Logout);
         db_man = (Button) rootView.findViewById(R.id.db_man);
         medicalRecord = (Button) rootView.findViewById(R.id.MedicalRecord);
+        makeAppointment = rootView.findViewById(R.id.MakeAppointment);
         diagnose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +80,24 @@ public class HomeFragment extends Fragment {
 
                 fragment = new MedicalRecordFragment();
                 String title = getString(R.string.title_medical_record);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+
+                // set the toolbar title
+
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
+            }
+        });
+        makeAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+
+                fragment = new MapsFragment();
+                String title = getString(R.string.title_make_appointment);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
