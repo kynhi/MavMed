@@ -86,7 +86,8 @@ public class MedicalRecordFragment extends Fragment {
                 addconfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        MainActivity activity = (MainActivity) getActivity();
+                        category= activity.getCategory();
                         if (!inputname.getText().toString().isEmpty() && category == 0) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
@@ -134,21 +135,5 @@ public class MedicalRecordFragment extends Fragment {
         super.onDetach();
     }
 
-    public void checkButton(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.radio_allergies:
-                if (checked)
-                    category = 0;
-                    break;
-            case R.id.radio_immune:
-                if (checked)
-                    category = 1;
-                break;
-            case R.id.radio_med:
-                if (checked)
-                    category = 2;
-                break;
-        }
-    }
+
 }

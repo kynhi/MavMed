@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
@@ -21,7 +22,7 @@ import com.example.login.mavmed.R;
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
     private static String TAG = MainActivity.class.getSimpleName();
-
+    int category;
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
 
@@ -109,6 +110,26 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
             // set the toolbar title
             getSupportActionBar().setTitle(title);
+        }
+    }
+    public int getCategory(){
+        return category;
+    }
+    public void checkButton(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch(view.getId()) {
+            case R.id.radio_allergies:
+                if (checked)
+                    category = 0;
+                break;
+            case R.id.radio_immune:
+                if (checked)
+                    category = 1;
+                break;
+            case R.id.radio_med:
+                if (checked)
+                    category = 2;
+                break;
         }
     }
 }
