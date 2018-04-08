@@ -1,12 +1,17 @@
 package com.example.login.mavmed.MapClasses;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.login.mavmed.activity.MainActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
@@ -16,7 +21,7 @@ import java.util.List;
  * Created by Nhi K luong on 4/7/2018.
  */
 
-public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
+public class GetNearbyPlacesData extends AsyncTask<Object, String, String>  {
 
     String googlePlacesData;
     GoogleMap mMap;
@@ -49,7 +54,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
     private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
-            Log.d("onPostExecute","Entered into showing locations");
+            Log.d("onPostExecute", "Entered into showing locations");
             MarkerOptions markerOptions = new MarkerOptions();
             HashMap<String, String> googlePlace = nearbyPlacesList.get(i);
             double lat = Double.parseDouble(googlePlace.get("lat"));
@@ -58,12 +63,15 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             String vicinity = googlePlace.get("vicinity");
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
-            markerOptions.title(placeName + " : " + vicinity);
+            markerOptions.title(placeName);
+            markerOptions.snippet(vicinity);
             mMap.addMarker(markerOptions);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+
         }
+
     }
 }

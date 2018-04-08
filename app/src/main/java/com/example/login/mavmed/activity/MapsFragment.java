@@ -63,6 +63,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         LocationListener {
 
     private View view;
+    private TextView doctorName,doctorAddress;
     private MapView mapView;
     private GoogleMap mGoogleMap;
     private GoogleApiClient mGoogleApiClient;
@@ -98,6 +99,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         MapsInitializer.initialize(this.getActivity());
 
         mGoogleMap = googleMap;
+
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(getActivity(),
@@ -131,12 +133,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
+
                 Toast.makeText(getActivity(),"Nearby Hospitals", Toast.LENGTH_LONG).show();
             }
         });
-
-
+        doctorName = (TextView) getActivity().findViewById(R.id.tv_doctor_name);
+        doctorAddress = (TextView) getActivity().findViewById(R.id.tv_doctor_address);
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                doctorName.setText(marker.getTitle());
+                doctorAddress.setText(marker.getSnippet());
+                return true;
+            }
+        });
     }
+
+
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
 
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
