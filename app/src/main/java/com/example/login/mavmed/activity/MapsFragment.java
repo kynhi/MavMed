@@ -13,7 +13,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,6 +92,26 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         // Set the map ready callback to receive the GoogleMap object
         mapView.getMapAsync(this);
 
+        Button pickDate = (Button) view.findViewById(R.id.bt_pick_date);
+        pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+
+                fragment = new DatePickerFragment();
+                String title = getString(R.string.title_make_appointment);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                
+                fragmentTransaction.commit();
+
+                // set the toolbar title
+
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
+            }
+        });
         return view;
     }
 
