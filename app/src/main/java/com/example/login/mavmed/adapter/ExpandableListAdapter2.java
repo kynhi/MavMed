@@ -1,13 +1,14 @@
 package com.example.login.mavmed.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.login.mavmed.R;
@@ -15,13 +16,16 @@ import com.example.login.mavmed.R;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Created by Francis on 04/09/2018.
+ */
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListAdapter2 extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapter2(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
@@ -77,16 +81,42 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView( int i,  int i1, boolean b, View view, ViewGroup viewGroup) {
-        String childText = (String)getChild(i,i1);
+    public View getChildView(final int i, final int i1, boolean b, View view, ViewGroup viewGroup) {
+        final String childText = (String)getChild(i,i1);
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_diagrecorditem,null);
+            view = inflater.inflate(R.layout.list_medicalrecorditem,null);
         }
 
         TextView txtListChild = (TextView)view.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
+        ImageView delete = (ImageView) view.findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Do you want to remove?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                List<String> child =
+                                        listHashMap.get(listDataHeader.get(i));
+                                child.remove(i1);
+                                notifyDataSetChanged();
+                            }
+                        });
+                builder.setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
         return view;
     }
 

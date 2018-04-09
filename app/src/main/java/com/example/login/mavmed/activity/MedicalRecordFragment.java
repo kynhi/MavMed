@@ -17,7 +17,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
-import com.example.login.mavmed.adapter.ExpandableListAdapter;
+import com.example.login.mavmed.adapter.ExpandableListAdapter2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import java.util.List;
 public class MedicalRecordFragment extends Fragment {
 
     private ExpandableListView listView;
-    private ExpandableListAdapter listAdapter;
+    private ExpandableListAdapter2 listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
     int category=0;
@@ -70,7 +70,7 @@ public class MedicalRecordFragment extends Fragment {
         med.add("cookies");
 
 
-        listAdapter = new ExpandableListAdapter(getContext(),listDataHeader,listHash);
+        listAdapter = new ExpandableListAdapter2(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
 
         final Button mShowDialog = (Button) rootView.findViewById(R.id.button_addMR);
