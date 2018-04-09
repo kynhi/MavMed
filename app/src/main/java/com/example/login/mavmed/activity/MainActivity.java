@@ -23,7 +23,10 @@ import com.example.login.mavmed.R;
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
     private static String TAG = MainActivity.class.getSimpleName();
+
     int category  = -1;
+
+
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
 
@@ -114,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             getSupportActionBar().setTitle(title);
         }
     }
+
     public void checkButton(View view) {
 
         boolean checked = ((RadioButton) view).isChecked();
@@ -132,8 +136,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 break;
         }
     }
+
     public int getCategory() {
         return category;
     }
     public void resetCategory() {category = -1;}
+
 }

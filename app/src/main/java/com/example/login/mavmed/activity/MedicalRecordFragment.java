@@ -86,10 +86,12 @@ public class MedicalRecordFragment extends Fragment {
                 addconfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         // get catogory variable from Main Activity
                         MainActivity activity = (MainActivity) getActivity();
                         category = activity.getCategory();
                         Log.d("MEdicalRecordFragment","Category" + Integer.toString(category));
+
                         if (!inputname.getText().toString().isEmpty() && category == 0) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
@@ -146,4 +148,6 @@ public class MedicalRecordFragment extends Fragment {
     }
 
 
+
 }
+
