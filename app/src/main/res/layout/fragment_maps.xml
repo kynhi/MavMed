@@ -7,27 +7,47 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="85dp" />
+        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:id="@+id/TF_location"
+    <TextView
+        android:id="@+id/tv_doctor_name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
+        android:layout_alignStart="@+id/B_search"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Enter Location" />
+        android:hint="Your Choosen Doctor"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/bt_pick_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_doctor_address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:text="Pick date" />
+
+
+    <TextView
+        android:id="@+id/tv_doctor_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_doctor_name"
+        android:layout_below="@+id/tv_doctor_name"
+        android:layout_marginTop="32dp"
+        android:hint="Your Doctor's Address" />
 
     <Button
         android:id="@+id/B_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TF_location"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/maps"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="14dp"
         android:onClick="onClick"
-        android:text="Search" />
+        android:text="Search Nearby Doctor" />
 </RelativeLayout>
