@@ -33,7 +33,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/db_man"
+        android:layout_below="@+id/reminders"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:text="Make Appointment"
@@ -59,12 +59,12 @@
         android:text="Medical Record" />
 
     <Button
-        android:id="@+id/db_man"
+        android:id="@+id/reminders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/MedicalRecord"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
-        android:text="Open Database Manager" />
+        android:text="Reminders" />
 
 </RelativeLayout>

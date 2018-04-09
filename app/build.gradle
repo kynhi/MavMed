@@ -4,15 +4,16 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.login.mavmed"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 26
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -22,12 +23,14 @@ android {
         exclude 'META-INF/NOTICE'
 
     }
-    sourceSets { main
-            { res.srcDirs = ['src/main/res', 'src/main/res/values-v21']
-                java {
-                    exclude '**/DashboardActivity.java'
+    sourceSets {
+        main
+                {
+                    res.srcDirs = ['src/main/res', 'src/main/res/values-v21']
+                    java {
+                        exclude '**/DashboardActivity.java'
+                    }
                 }
-            }
 
     }
 }

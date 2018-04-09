@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>﻿
 
     <application
         android:allowBackup="true"
@@ -21,15 +22,21 @@
         </activity>
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.DiagnosisSearchFragment" />
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.MedicalRecordFragment"
             android:exported="true"
             android:label="Medical Record" />
-        <activity android:name=".activity.UserProfileFragment"></activity>
+        <activity android:name=".activity.UserProfileFragment" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBgS029Ll9mbxJAYhx1ryYHa2mO6WMaqlM"/>
+            android:value="AIzaSyBgS029Ll9mbxJAYhx1ryYHa2mO6WMaqlM" />
+
+        <activity android:name=".activity.Reminder"></activity>
+
+        <activity android:name=".RepeatingActivity"/>
+        <receiver android:name=".activity.AlarmReceiver" android:enabled="true"> </receiver>
 
     </application>
 
