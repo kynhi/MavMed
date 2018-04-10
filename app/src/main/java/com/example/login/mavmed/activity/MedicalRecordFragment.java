@@ -1,11 +1,9 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
-
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
 import com.example.login.mavmed.adapter.ExpandableListAdapter2;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,12 +71,81 @@ public class MedicalRecordFragment extends Fragment {
 
         listAdapter = new ExpandableListAdapter2(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
-
-        final Button mShowDialog = (Button) rootView.findViewById(R.id.button_addMR);
+//BMI DIALOG
+        Button mShowDialog = (Button) rootView.findViewById(R.id.button_bmi);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+                View mView = getLayoutInflater().inflate(R.layout.bmi_medicalrecord, null);
+                final EditText weight = (EditText) mView.findViewById(R.id.et_weight);
+                final EditText heightft = (EditText) mView.findViewById(R.id.et_heightft);
+                final EditText heightin = (EditText) mView.findViewById(R.id.et_heightin);
+                final TextView result = (TextView) mView.findViewById(R.id.tv_result);
+                final TextView condition = (TextView) mView.findViewById(R.id.tv_condition);
+                final Button calculate = (Button) mView.findViewById(R.id.button_bmiCalc);
+                final Button done = (Button) mView.findViewById(R.id.button_done);
+                calculate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                    boolean good = true;
+                    double finalcalc = -1;
+                    //TEST FOR PARSING ERROR
+                        try {
+                            Double.parseDouble(weight.getText().toString());
+                        } catch (NumberFormatException e) {
+                            good = false;
+                        }
+                        try {
+                            Double.parseDouble(heightft.getText().toString());
+                        } catch (NumberFormatException e) {
+                            good = false;
+                        }
+                        try {
+                            Double.parseDouble(heightin.getText().toString());
+                        } catch (NumberFormatException e) {
+                            good = false;
+                        }
+//BMI CALCULATOR
+                    if (good == true) {
+                        double numerator = 703 * Double.parseDouble(weight.getText().toString());
+                        double denominator = (Double.parseDouble(heightft.getText().toString()) * 12) + Double.parseDouble(heightin.getText().toString());
+                        denominator = denominator * denominator;
+                        finalcalc = (double) numerator / (double) denominator;
+                    }
+//BMI CONDITION CASE
+                    if (finalcalc < 18.5 && finalcalc != -1) {condition.setText("Underweight"); result.setText(String.format( "%.1f", finalcalc ));}
+                    else if ((finalcalc > 18.5) && (finalcalc < 20.0)) {condition.setText("Healthy"); result.setText(String.format( "%.1f", finalcalc ));}
+                    else if ((finalcalc > 20.0) && (finalcalc < 40.0)) {condition.setText("Overweight"); result.setText(String.format( "%.1f", finalcalc ));}
+                    else if (finalcalc > 40.0) {condition.setText("Obese"); result.setText(String.format( "%.1f", finalcalc ));}
+                    else {
+                            Toast.makeText(getActivity(),"Please Fill in Empty Field", Toast.LENGTH_LONG).show();
+                            result.setText("0.0");
+                            condition.setText("Unknown");
+                        }
+                    }
+
+                });
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+//CLOSE THE DIALOG IF PRESS DONE
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+
+        });
+
+
+        mShowDialog = (Button) rootView.findViewById(R.id.button_addMR);
+        mShowDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                 View mView = getLayoutInflater().inflate(R.layout.add_medicalrecord, null);
                 final EditText inputname = (EditText) mView.findViewById(R.id.et_MRtext);
