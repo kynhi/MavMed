@@ -142,6 +142,8 @@ public class DiagnosisSearchFragment extends Fragment {
 
         /*Disease instances*/
         Disease heartAttack = new Disease("Heart attack", heart_attack);
+        Disease heartAttack = new Disease("Heart attack", heart_attack);
+
         Disease foodPoisoning = new Disease("Food poisoning", food_poisoning);
         Disease heatStroke = new Disease("Heat stroke", heat_stroke);
         Disease allergicReaction = new Disease("Allergic reactoin", allergic_reaction);
@@ -172,7 +174,7 @@ public class DiagnosisSearchFragment extends Fragment {
 //                listHash.put(listDataHeader.get(0),hello);
                 /*Iterating over disease list*/
                 for(Disease dis: diseases) {
-                    if(dis.query(symptom)) //tells us if the disease has this symptom
+                    if(dis.query(symptom) || dis.name.equalsIgnoreCase(symptom)) //tells us if the disease has this symptom
                     {
                         ++count;
                         listDataHeader.add(dis.name);
