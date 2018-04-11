@@ -30,6 +30,7 @@
     <string name="title_database_mananger">Database Manager</string>
     <string name="title_home">Home</string>
     <string name="title_make_appointment">Make Appointment</string>
+    <string name="title_pick_date">Choose Your Appointment date</string>
 
     <string name="headache">headache</string>
     <string name="cough">cough</string>
