@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <CheckBox android:id="@+id/checkbox_cough"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cough"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_headache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/headache"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_flumps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/torn_flumps"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_diarrhea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/diarrhea"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_indigestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/indigestion"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_gloop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pulled_gloop"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_heartburn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heartburn"
+        android:onClick="onCheckboxClicked"/>
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send" />
+
+</LinearLayout>

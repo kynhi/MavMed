@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.login.mavmed.activity.HomeFragment">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="278dp"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:text="Welcome to MavMed!"
+        android:textAlignment="center" />
+" />
+
+    <Button
+        android:id="@+id/diag_search"
+        android:layout_width="180dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Diagnosis Search" />
+
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reminders"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Make Appointment"
+        android:id="@+id/MakeAppointment" />
+
+    <Button
+        android:id="@+id/Logout"
+        android:layout_width="109dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/MakeAppointment"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Log Out" />
+
+    <Button
+        android:id="@+id/MedicalRecord"
+        android:layout_width="182dp"
+        android:layout_height="46dp"
+
+        android:layout_below="@+id/diag_search"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Medical Record" />
+
+    <Button
+        android:id="@+id/reminders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MedicalRecord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Reminders" />
+
+</RelativeLayout>

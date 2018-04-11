@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Notifications</string>
+    <string name="channel_name">my_channel</string>
+    <string name="channel_description">this is my channel, there are many like it but this one is mien</string>
+</resources>

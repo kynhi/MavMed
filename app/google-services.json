@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "446010445077",
+    "firebase_url": "https://my-awesome-project-507ae.firebaseio.com",
+    "project_id": "my-awesome-project-507ae",
+    "storage_bucket": "my-awesome-project-507ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446010445077:android:eb6d794313f2f16a",
+        "android_client_info": {
+          "package_name": "com.example.login.mavmed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446010445077-o2lvhihhsoe2gonn5hb265saf4g88pqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.login.mavmed",
+            "certificate_hash": "6e9bde5c6a5523c4bbf69023e17436e47ed8af4b"
+          }
+        },
+        {
+          "client_id": "446010445077-ei5mbe49cqd467so42r1g91t7emmp28p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4i4u-7_e_nRVTnwmnc8Kqpx0ZDXJ_Cv4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446010445077-ei5mbe49cqd467so42r1g91t7emmp28p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
