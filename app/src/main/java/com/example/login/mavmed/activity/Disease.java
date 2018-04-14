@@ -18,7 +18,8 @@ public class Disease extends ArrayList<String>{
     public boolean query(String query) {
         //user will give a symptom, must iterate over all symptoms
         //and return the diseases with the correct symptoms
-        return symptoms.contains(query.toString());
+        return symptoms.contains(query.toString().toLowerCase().trim());
+
     }
     String name;
     ArrayList<String> symptoms = new ArrayList<String>();

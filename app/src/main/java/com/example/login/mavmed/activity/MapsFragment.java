@@ -3,10 +3,12 @@ package com.example.login.mavmed.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,7 +48,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -76,10 +77,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     double latitude;
     double longitude;
     private int PROXIMITY_RADIUS = 10000;
+
+    String doctor_name = null;
+    String doctor_address = null;
+    String doc_tel = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
+
+
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -92,19 +100,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         // Set the map ready callback to receive the GoogleMap object
         mapView.getMapAsync(this);
 
+        Button call_doc = (Button) view.findViewById(R.id.call_doc);
+
         Button pickDate = (Button) view.findViewById(R.id.bt_pick_date);
         pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = null;
 
-                fragment = new DatePickerFragment();
+                fragment = new Reminder();
                 String title = getString(R.string.title_make_appointment);
-
+                Bundle args = new Bundle();
+                args.putString( "docname" , doctor_name);
+                args.putString("docaddress", doctor_address);
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
-                
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -112,6 +124,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
             }
         });
+
+        call_doc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + doc_tel));
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -167,6 +189,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public boolean onMarkerClick(Marker marker) {
                 doctorName.setText(marker.getTitle());
                 doctorAddress.setText(marker.getSnippet());
+                doc_tel = marker.getSnippet();
+                doctor_name = marker.getTitle();
+                doctor_address = marker.getSnippet();
                 return true;
             }
         });

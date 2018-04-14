@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class HomeFragment extends Fragment {
     Button logout ;
     Button diagnose;
     Button medicalRecord, makeAppointment;
-    Button db_man;
+    Button reminders;
 
     private FragmentDrawer drawerFragment; //Fragment
     // Creating FirebaseAuth.
@@ -51,7 +52,7 @@ public class HomeFragment extends Fragment {
 
         diagnose = (Button) rootView.findViewById(R.id.diag_search);
         logout = (Button) rootView.findViewById(R.id.Logout);
-        db_man = (Button) rootView.findViewById(R.id.db_man);
+        reminders = (Button) rootView.findViewById(R.id.reminders);
         medicalRecord = (Button) rootView.findViewById(R.id.MedicalRecord);
         makeAppointment = rootView.findViewById(R.id.MakeAppointment);
         diagnose.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,24 @@ public class HomeFragment extends Fragment {
 
                 fragment = new MedicalRecordFragment();
                 String title = getString(R.string.title_medical_record);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+
+                // set the toolbar title
+
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
+            }
+        });
+        reminders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+
+                fragment = new Reminder();
+                String title = getString(R.string.title_reminder);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

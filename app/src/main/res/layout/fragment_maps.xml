@@ -28,7 +28,7 @@
         android:layout_below="@+id/tv_doctor_address"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
-        android:text="Pick date" />
+        android:text="Send to Calendar" />
 
 
     <TextView
@@ -50,4 +50,13 @@
         android:layout_marginTop="14dp"
         android:onClick="onClick"
         android:text="Search Nearby Doctor" />
+
+    <Button
+        android:id="@+id/call_doc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_pick_date"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Call Doctor" />
 </RelativeLayout>
