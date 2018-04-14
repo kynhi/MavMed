@@ -182,7 +182,7 @@ public class LoginActivity extends Activity {
                                 // Opening the UserProfileFragment.
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
-                             } else{
+                            } else{
                                 Toast.makeText(LoginActivity.this, "Your Email is not verified please check your email for verification email from us", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -204,6 +204,5 @@ public class LoginActivity extends Activity {
                         }
                     }
                 });
-
     }
 }

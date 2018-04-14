@@ -104,7 +104,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
-                
                 fragmentTransaction.commit();
 
                 // set the toolbar title
