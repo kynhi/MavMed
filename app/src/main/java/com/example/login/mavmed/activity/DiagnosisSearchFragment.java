@@ -172,7 +172,7 @@ public class DiagnosisSearchFragment extends Fragment {
 //                listHash.put(listDataHeader.get(0),hello);
                 /*Iterating over disease list*/
                 for(Disease dis: diseases) {
-                    if(dis.query(symptom)) //tells us if the disease has this symptom
+                    if(dis.query(symptom) || dis.name.equalsIgnoreCase(symptom)) //tells us if the disease has this symptom
                     {
                         ++count;
                         listDataHeader.add(dis.name);
