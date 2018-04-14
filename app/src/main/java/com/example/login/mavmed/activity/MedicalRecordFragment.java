@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.login.mavmed.R;
 import com.example.login.mavmed.adapter.ExpandableListAdapter2;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -214,8 +213,6 @@ public class MedicalRecordFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-
 
 }
 

@@ -26,6 +26,10 @@
             android:name=".activity.MedicalRecordFragment"
             android:exported="true"
             android:label="Medical Record" />
+        <activity
+            android:name=".activity.Email"
+            android:exported="true"
+            android:label="Email" />
         <activity android:name=".activity.UserProfileFragment"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
