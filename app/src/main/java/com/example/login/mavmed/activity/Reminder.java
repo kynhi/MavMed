@@ -51,6 +51,22 @@ public class Reminder extends Fragment {
 //        Button set_reminder = (Button) rootView.findViewById(R.id.set_reminder);
 //        final EditText editText = (EditText) rootView.findViewById(R.id.med_name);
 
+
+        String docname = null;
+        String docaddress = null;
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            docname = arguments.getString("docname");
+            docaddress = arguments.getString("docaddress");
+        }
+
+       /* Message.message(getContext(), docname);
+        Message.message(getContext(), docaddress);*/
+
+        apptTitle.setText(docname, TextView.BufferType.EDITABLE);
+        apptLocation.setText(docaddress, TextView.BufferType.EDITABLE);
+
         pick_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,9 +98,6 @@ public class Reminder extends Fragment {
 
                 String title = apptTitle.getText().toString();
                 String location = apptLocation.getText().toString();
-
-                DialogFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(), "timepickerappt");
 
                 Intent calIntent = new Intent(Intent.ACTION_INSERT);
                 calIntent.setData(CalendarContract.Events.CONTENT_URI);

@@ -1,6 +1,7 @@
 package com.example.login.mavmed.activity;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.Toast;
 
 public class Message {
