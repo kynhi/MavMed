@@ -2,6 +2,7 @@ package com.example.login.mavmed.activity;
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,14 +164,13 @@ public class DiagnosisSearchFragment extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean not_there = false;
                 listDataHeader.clear();
                 listHash.clear();
                 String symptom = searchBox.getText().toString();
                 int count = -1;
                 diseaseList.setText(null);
-//                listDataHeader.add("hello");
-//                final List<String> hello = new ArrayList<>();
-//                listHash.put(listDataHeader.get(0),hello);
+
                 /*Iterating over disease list*/
                 for(Disease dis: diseases) {
                     if(dis.query(symptom) || dis.name.equalsIgnoreCase(symptom)) //tells us if the disease has this symptom
@@ -180,9 +181,17 @@ public class DiagnosisSearchFragment extends Fragment {
                         listHash.put(listDataHeader.get(count),list);
                         list.addAll(dis.symptoms);
                     }
+                    else{   //the query does not match anything in the arraylist
+                        not_there = true;
+                    }
                 }
                 listAdapter = new ExpandableListAdapter(getContext(),listDataHeader,listHash);
                 listView.setAdapter(listAdapter);
+                if(not_there){
+                    Toast toast = new Toast(getContext());
+                    toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+                    toast.makeText(getContext(), "Sorry, I don't recognize any disease related to \"" + symptom + "\"", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

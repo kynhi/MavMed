@@ -75,6 +75,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     double latitude;
     double longitude;
     private int PROXIMITY_RADIUS = 10000;
+
+    String doctor_name = null;
+    String doctor_address = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -97,9 +101,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View v) {
                 Fragment fragment = null;
 
-                fragment = new DatePickerFragment();
+                fragment = new Reminder();
                 String title = getString(R.string.title_make_appointment);
-
+                Bundle args = new Bundle();
+                args.putString( "docname" , doctor_name);
+                args.putString("docaddress", doctor_address);
+                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
@@ -165,6 +172,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public boolean onMarkerClick(Marker marker) {
                 doctorName.setText(marker.getTitle());
                 doctorAddress.setText(marker.getSnippet());
+                doctor_name = marker.getTitle();
+                doctor_address = marker.getSnippet();
                 return true;
             }
         });
