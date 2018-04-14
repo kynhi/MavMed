@@ -3,10 +3,12 @@ package com.example.login.mavmed.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,11 +80,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
     String doctor_name = null;
     String doctor_address = null;
+    String doc_tel = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
+
+
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -94,6 +99,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         // Set the map ready callback to receive the GoogleMap object
         mapView.getMapAsync(this);
+
+        Button call_doc = (Button) view.findViewById(R.id.call_doc);
 
         Button pickDate = (Button) view.findViewById(R.id.bt_pick_date);
         pickDate.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +124,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
             }
         });
+
+        call_doc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + doc_tel));
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -172,6 +189,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public boolean onMarkerClick(Marker marker) {
                 doctorName.setText(marker.getTitle());
                 doctorAddress.setText(marker.getSnippet());
+                doc_tel = marker.getSnippet();
                 doctor_name = marker.getTitle();
                 doctor_address = marker.getSnippet();
                 return true;
