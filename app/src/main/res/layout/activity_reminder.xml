@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/button_remind"
-        android:layout_width="172dp"
+        android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="showTimePickerDialog"
@@ -21,7 +21,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="52dp"
         android:text="Select Alarm Time"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,17 +33,17 @@
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="20dp"
         android:text="Save to Calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apptLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/appt_date" />
 
     <EditText
         android:id="@+id/apptTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
         android:hint="Appointment Name..."
         android:inputType="textPersonName"
@@ -69,19 +69,32 @@
         android:id="@+id/appt_time"
         android:layout_width="124dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="Appointment Time"
         app:layout_constraintEnd_toStartOf="@+id/appt_date"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apptLocation" />
 
     <Button
         android:id="@+id/appt_date"
         android:layout_width="124dp"
         android:layout_height="61dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginTop="28dp"
         android:text="Appointment Date"
-        app:layout_constraintTop_toBottomOf="@+id/apptLocation"
-        tools:layout_editor_absoluteX="207dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apptLocation" />
+
+    <Button
+        android:id="@+id/alarm_disable"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Disable Alarm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_remind" />
 
 </android.support.constraint.ConstraintLayout>

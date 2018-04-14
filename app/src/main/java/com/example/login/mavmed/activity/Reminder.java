@@ -28,8 +28,6 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class Reminder extends Fragment {
 
-    String medname = "Time to take your medication";
-
     public Reminder() {
         // Required empty public constructor
     }
@@ -46,8 +44,7 @@ public class Reminder extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_reminder, container, false);
 
         Button pick_time = (Button) rootView.findViewById(R.id.button_remind);
-        Button pick_time = (Button) rootView.findViewById(R.id.button_remind);
-        Button pick_time = (Button) rootView.findViewById(R.id.button_remind);
+        Button cancel = (Button) rootView.findViewById(R.id.alarm_disable);
         final Button calendar = (Button) rootView.findViewById(R.id.calendar);
         final EditText apptTitle = (EditText) rootView.findViewById(R.id.apptTitle);
         final EditText apptLocation = (EditText) rootView.findViewById(R.id.apptLocation);
@@ -58,12 +55,24 @@ public class Reminder extends Fragment {
             @Override
             public void onClick(View view) {
                 DialogFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(), "timepickerappt");
+            }
+        });
 
-                //Supply some arguments to the new fragment
-                /*Bundle args = new Bundle();
-                args.putString("medname", medname);*/
-                newFragment.show(getFragmentManager(), "timepicker");
-//                newFragment.setArguments(args);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Message.message(getContext(), "Alarm cleared");
+
+                Calendar calendar = Calendar.getInstance();
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+
+                /*Set up the alarm*/
+                Intent intent = new Intent(getContext(), AlarmReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                alarmManager.cancel(pendingIntent);
             }
         });
 
@@ -76,7 +85,6 @@ public class Reminder extends Fragment {
 
                 DialogFragment newFragment = new TimePickerFragment();
                 newFragment.show(getFragmentManager(), "timepickerappt");
-
 
                 Intent calIntent = new Intent(Intent.ACTION_INSERT);
                 calIntent.setData(CalendarContract.Events.CONTENT_URI);
