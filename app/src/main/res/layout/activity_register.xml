@@ -48,6 +48,7 @@
         android:layout_below="@+id/editEmail"
         android:layout_marginTop="24dp"
         android:gravity="center"
+        android:inputType="date"
         android:hint="Enter Date of Birth" />
 
     <EditText
@@ -64,15 +65,36 @@
         android:textColor="#000"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="210dp" />
-    <EditText
-        android:id="@+id/edit_Gender"
-        android:layout_width="fill_parent"
+    <RadioGroup
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editPassword"
-        android:gravity="center"
-        android:layout_marginTop="24dp"
-        android:hint="Male/Female/Other"
-        />
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:layout_above="@id/buttonRegister"
+        >
+        <RadioButton
+            android:id="@+id/other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:checked="false"/>
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:checked="false"/>
+    </RadioGroup>
+
+
 
     <Button
         android:id="@+id/buttonRegister"
@@ -84,4 +106,7 @@
         android:text="Create New Account "
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="281dp" />
+
+
+
 </RelativeLayout>
