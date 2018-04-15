@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
@@ -23,10 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText Email, Password, Name ,Birthday,Gender;
+    EditText Email, Password, Name ,Birthday;
     Button Register;
     String NameHolder, EmailHolder, PasswordHolder, BirthdayHolder,GenderHolder;
     Boolean EditTextEmptyHolder;
+    RadioGroup Gender;
     final String TAG = "MavMed";
     ProgressDialog progressDialog;
     // Reference to Database
@@ -41,11 +44,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         Register = (Button)findViewById(R.id.buttonRegister);
 
+        //radio group button for gender
+
         Name = (EditText) findViewById(R.id.editFullname);
         Email = (EditText)findViewById(R.id.editEmail);
         Password = (EditText)findViewById(R.id.editPassword);
         Birthday = (EditText) findViewById(R.id.editBirthday);
-        Gender = (EditText) findViewById(R.id.edit_Gender);
+        Gender = (RadioGroup) findViewById(R.id.radioGroup);
         //LoginDbHelper = new LoginDatabaseHelper(this);
         // Creating object instance.
         firebaseAuth = FirebaseAuth.getInstance();
@@ -108,7 +113,10 @@ public class RegisterActivity extends AppCompatActivity {
         EmailHolder = Email.getText().toString();
         PasswordHolder = Password.getText().toString();
         BirthdayHolder = Birthday.getText().toString();
-        GenderHolder = Gender.getText().toString();
+
+        int selected=Gender.getCheckedRadioButtonId();
+        RadioButton genderChose=(RadioButton) findViewById(selected);
+        GenderHolder = genderChose.getText().toString();
 
         if(TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)||
                 TextUtils.isEmpty(BirthdayHolder)|| TextUtils.isEmpty(NameHolder)){
