@@ -4,6 +4,7 @@ package com.example.login.mavmed.activity;
  * Created by Nhi K luong on 3/4/2018.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     int category  = -1;
 
+    // Creating FirebaseAuth object.
+    FirebaseAuth firebaseAuth;
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         // display the first navigation drawer view on app launch
         displayView(0);
 
@@ -115,6 +120,28 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             case 3:
                 fragment = new UserProfileFragment();
                 title= getString(R.string.title_user_profile);
+                break;
+            case 4:
+                fragment = new Reminder();
+                title = getString(R.string.title_reminder);
+                break;
+            case 5:
+                fragment = new MapsFragment();
+                title = getString(R.string.title_make_appointment);
+                break;
+            case 6:
+                // Destroying login season.
+                firebaseAuth.signOut();
+
+                // Finishing current Main activity.
+                finish();
+
+                // Redirect to Login Activity after click on logout button.
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+
+                // Showing toast message on logout.
+                Toast.makeText(MainActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
             default:
                 break;
         }
