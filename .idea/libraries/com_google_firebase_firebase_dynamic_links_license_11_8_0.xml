@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.google.firebase:firebase-dynamic-links-license-11.8.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-license-11.8.0.aar/3144f635cfe472d8feebdf572e3a803d/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-license-11.8.0.aar/3144f635cfe472d8feebdf572e3a803d/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-license-11.8.0.aar/b1d4ba87ed152025723812dd5167cc83/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-license-11.8.0.aar/b1d4ba87ed152025723812dd5167cc83/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

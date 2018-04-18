@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeFragment extends Fragment {
     Button logout ;
     Button diagnose;
-    Button medicalRecord, makeAppointment;
+    Button medicalRecord, makeAppointment,userProfile;
     Button reminders;
 
     private FragmentDrawer drawerFragment; //Fragment
@@ -55,6 +55,8 @@ public class HomeFragment extends Fragment {
         reminders = (Button) rootView.findViewById(R.id.reminders);
         medicalRecord = (Button) rootView.findViewById(R.id.MedicalRecord);
         makeAppointment = rootView.findViewById(R.id.MakeAppointment);
+        userProfile = rootView.findViewById(R.id.User_profile);
+
         diagnose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,9 +115,7 @@ public class HomeFragment extends Fragment {
         makeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = null;
-
-                fragment = new MapsFragment();
+                Fragment fragment = new MapsFragment();
                 String title = getString(R.string.title_make_appointment);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -125,10 +125,24 @@ public class HomeFragment extends Fragment {
 
                 // set the toolbar title
 
+
+            }
+        });
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new UserProfileFragment();
+                String title = getString(R.string.title_user_profile);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                // set the toolbar title
                 ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
             }
         });
-
         firebaseAuth =  FirebaseAuth.getInstance();
         // On activity start check whether there is user previously logged in or not.
         if(firebaseAuth.getCurrentUser() == null){

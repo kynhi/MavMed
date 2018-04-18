@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/diag_search"
-        android:layout_width="180dp"
+        android:layout_width="300dp"
         android:layout_height="42dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
@@ -31,26 +31,26 @@
 
     <Button
 
-        android:layout_width="wrap_content"
+        android:id="@+id/MakeAppointment"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reminders"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:text="Make Appointment"
-        android:id="@+id/MakeAppointment" />
+        android:layout_alignStart="@+id/User_profile"
+        android:layout_below="@+id/User_profile"
+        android:layout_marginTop="18dp"
+        android:text="Make Appointment" />
 
     <Button
         android:id="@+id/Logout"
-        android:layout_width="109dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
+        android:layout_alignStart="@+id/MakeAppointment"
         android:layout_below="@+id/MakeAppointment"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="17dp"
         android:text="Log Out" />
 
     <Button
         android:id="@+id/MedicalRecord"
-        android:layout_width="182dp"
+        android:layout_width="300dp"
         android:layout_height="46dp"
 
         android:layout_below="@+id/diag_search"
@@ -60,11 +60,20 @@
 
     <Button
         android:id="@+id/reminders"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/MedicalRecord"
         android:layout_below="@+id/MedicalRecord"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="16dp"
         android:text="Reminders" />
+
+    <Button
+        android:id="@+id/User_profile"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/reminders"
+        android:layout_below="@+id/reminders"
+        android:layout_marginTop="11dp"
+        android:text="User Profile" />
 
 </RelativeLayout>
