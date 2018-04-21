@@ -60,13 +60,12 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>  {
             double lat = Double.parseDouble(googlePlace.get("lat"));
             double lng = Double.parseDouble(googlePlace.get("lng"));
             String placeName = googlePlace.get("place_name");
-            String tel =googlePlace.get("formatted_phone_number");
+            String tel =googlePlace.get("phone_no");
             String vicinity = googlePlace.get("vicinity");
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
             markerOptions.title(placeName);
             markerOptions.snippet(vicinity);
-            markerOptions.snippet(tel);
             mMap.addMarker(markerOptions);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
             //move map camera

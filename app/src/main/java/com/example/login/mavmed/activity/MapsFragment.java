@@ -88,7 +88,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
 
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -189,7 +188,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public boolean onMarkerClick(Marker marker) {
                 doctorName.setText(marker.getTitle());
                 doctorAddress.setText(marker.getSnippet());
-                doc_tel = marker.getSnippet();
+                //doc_tel = marker.getSnippet();
                 doctor_name = marker.getTitle();
                 doctor_address = marker.getSnippet();
                 return true;
