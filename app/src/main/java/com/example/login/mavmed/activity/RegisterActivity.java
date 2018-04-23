@@ -10,29 +10,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
+import com.example.login.mavmed.data.UserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText Email, Password, Name ;
+    EditText Email, Password, Name ,Birthday;
     Button Register;
-    String NameHolder, EmailHolder, PasswordHolder;
+    String NameHolder, EmailHolder, PasswordHolder, BirthdayHolder,GenderHolder;
     Boolean EditTextEmptyHolder;
+    RadioGroup Gender;
     final String TAG = "MavMed";
-    //SQLiteDatabase LoginDatabase;
-    //String SQLiteDataBaseQueryHolder ;
-    //LoginDatabaseHelper LoginDbHelper;
-    //Cursor cursor;
-    //String F_Result = "Not_Found";
-    // Creating Progress dialog.
     ProgressDialog progressDialog;
-
+    // Reference to Database
+    private DatabaseReference mDatabase;
+    UserData newuser;
     // Creating FirebaseAuth object.
     FirebaseAuth firebaseAuth ;
     @Override
@@ -42,10 +44,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         Register = (Button)findViewById(R.id.buttonRegister);
 
+        //radio group button for gender
+
+        Name = (EditText) findViewById(R.id.editFullname);
         Email = (EditText)findViewById(R.id.editEmail);
         Password = (EditText)findViewById(R.id.editPassword);
-        //Name = (EditText)findViewById(R.id.editName);
-
+        Birthday = (EditText) findViewById(R.id.editBirthday);
+        Gender = (RadioGroup) findViewById(R.id.radioGroup);
         //LoginDbHelper = new LoginDatabaseHelper(this);
         // Creating object instance.
         firebaseAuth = FirebaseAuth.getInstance();
@@ -70,35 +75,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-/*    // SQLite database build method.
-    public void LoginDataBaseBuild(){
-        LoginDatabase = openOrCreateDatabase(LoginDatabaseHelper.DATABASE_NAME, Context.MODE_PRIVATE, null);
-    }
-    // SQLite table build method.
-    public void SQLiteTableBuild() {
 
-        LoginDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + LoginEntry.TABLE_NAME +
-                "(" +LoginEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    LoginEntry.COLUMN_USERNAME + " VARCHAR, " +
-                    LoginEntry.COLUMN_PASSWORD + " VARCHAR, " +
-                    LoginEntry.COLUMN_EMAIL + " VARCHAR);" );
-    }*/
-    // Insert data into SQLite database method.
     public void InsertDataIntoFirebase(){
 
         // If editText is not empty then this block will executed.
-        if(EditTextEmptyHolder)
+        if(EditTextEmptyHolder == true)
         {
 
-            // SQLite query to insert data into table.
-            //SQLiteDataBaseQueryHolder = "INSERT INTO "+LoginEntry.TABLE_NAME+" " +
-             //       "(username,email,password) VALUES('"+NameHolder+"', '"+EmailHolder+"', '"+PasswordHolder+"');";
-
-            // Executing query.
-            //LoginDatabase.execSQL(SQLiteDataBaseQueryHolder);
-
-            // Closing SQLite database object.
-            //LoginDatabase.close();
 
             UserRegistrationFunction();
 
@@ -117,19 +100,26 @@ public class RegisterActivity extends AppCompatActivity {
     public void EmptyEditTextAfterDataInsert(){
 
         Email.getText().clear();
-
+        Birthday.getText().clear();
         Password.getText().clear();
+        Name.getText().clear();
 
     }
     // Method to check EditText is empty or Not.
     public void CheckEditTextStatus(){
 
         // Getting value from All EditText and storing into String Variables.
-        //NameHolder = Name.getText().toString() ;
+        NameHolder = Name.getText().toString() ;
         EmailHolder = Email.getText().toString();
         PasswordHolder = Password.getText().toString();
+        BirthdayHolder = Birthday.getText().toString();
 
-        if(TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)){
+        int selected=Gender.getCheckedRadioButtonId();
+        RadioButton genderChose=(RadioButton) findViewById(selected);
+        GenderHolder = genderChose.getText().toString();
+
+        if(TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)||
+                TextUtils.isEmpty(BirthdayHolder)|| TextUtils.isEmpty(NameHolder)){
 
             EditTextEmptyHolder = false ;
         }
@@ -138,61 +128,13 @@ public class RegisterActivity extends AppCompatActivity {
             EditTextEmptyHolder = true ;
         }
     }
-/*    // Checking Email is already exists or not.
-    public void CheckingEmailAlreadyExistsOrNot(){
 
-        // Opening SQLite database write permission.
-        LoginDatabase = LoginDbHelper.getWritableDatabase();
-
-        // Adding search email query to cursor.
-        cursor = LoginDatabase.query(LoginEntry.TABLE_NAME, null, " " +
-                                        LoginEntry.COLUMN_EMAIL + "=?", new String[]{EmailHolder},
-                                        null, null, null);
-
-        while (cursor.moveToNext()) {
-
-            if (cursor.isFirst()) {
-
-                cursor.moveToFirst();
-
-                // If Email is already exists then Result variable value set as Email Found.
-                F_Result = "Email Found";
-
-                // Closing cursor.
-                cursor.close();
-            }
-        }
-
-        // Calling method to check final result and insert data into SQLite database.
-        CheckFinalResult();
-
-    }*/
-
-
-/*    // Checking result
-    public void CheckFinalResult(){
-        // Checking whether email is already exists or not.
-        if(F_Result.equalsIgnoreCase("Email Found"))
-        {
-
-            // If email is exists then toast msg will display.
-            Toast.makeText(RegisterActivity.this,"Email Already Exists",Toast.LENGTH_LONG).show();
-
-        }
-        else {
-
-            // If email already dose n't exists then user registration details will entered to SQLite database.
-            InsertDataIntoSQLiteDatabase();
-        }
-        F_Result = "Not_Found" ;
-    }*/
     // Creating UserRegistrationFunction
     public void UserRegistrationFunction() {
 
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait, We are Registering Your Data on Server");
         progressDialog.show();
-
         // Creating createUserWithEmailAndPassword method and pass email and password inside it.
         firebaseAuth.createUserWithEmailAndPassword(EmailHolder, PasswordHolder).
                 addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -215,6 +157,17 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
+                            // Create UserData object to send to database
+                            newuser = new UserData(NameHolder,BirthdayHolder,EmailHolder,GenderHolder);
+
+                            //point to user child on database
+                            String userID = user.getUid();
+                            mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase.child("users").child(userID).setValue(newuser);
+//                            mDatabase.child("users").child(userID).child("Email").setValue(EmailHolder);
+//                            mDatabase.child("users").child(userID).child("Password").setValue(PasswordHolder);
+//                            mDatabase.child("users").child(userID).child("Birthday").setValue(BirthdayHolder);
+
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
@@ -231,4 +184,5 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }

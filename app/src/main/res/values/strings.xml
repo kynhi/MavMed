@@ -10,7 +10,9 @@
     <string name="nav_item_medical_record">Medical Record</string>
     <string name="nav_item_user_profile">User Profile</string>
     <string name="nav_item_notifications">Messages</string>
+    <string name="nav_item_reminder">Reminder</string>
     <string name="nav_item_make_appointment">Make Appointment</string>
+    <string name="nav_item_logout">Logout</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -18,8 +20,9 @@
         <item>@string/nav_item_diagnosis_search</item>
         <item>@string/nav_item_medical_record</item>
         <item>@string/nav_item_user_profile</item>
-        <item>@string/nav_item_notifications</item>
+        <item>@string/nav_item_reminder</item>
         <item>@string/nav_item_make_appointment</item>
+        <item>@string/nav_item_logout</item>
     </string-array>
 
 
@@ -29,6 +32,8 @@
     <string name="title_message">Message</string>
     <string name="title_database_mananger">Database Manager</string>
     <string name="title_home">Home</string>
+    <string name="title_remider">Remider</string>
+    <string name="title_logout">Logout</string>
     <string name="title_make_appointment">Make Appointment</string>
     <string name="title_pick_date">Choose Your Appointment date</string>
 
