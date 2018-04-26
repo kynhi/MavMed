@@ -15,8 +15,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="Register New User"
-        android:textColor="#000"
+        android:textColor="#b139a1"
         android:textSize="20dp" />
 
     <EditText
@@ -72,15 +73,16 @@
         android:id="@+id/radioGroup"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="35dp"
         android:layout_above="@id/buttonRegister"
         >
+
         <RadioButton
             android:id="@+id/other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="Male" />
         <RadioButton
             android:id="@+id/male"
             android:layout_width="wrap_content"
@@ -94,17 +96,28 @@
             android:text="Other"
             android:checked="false"/>
     </RadioGroup>
+
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp"
+        android:layout_above="@+id/back"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/buttonshape"
         android:text="Create New Account "
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="281dp" />
 
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/buttonshape"
+        android:text="Back" />
 
 
 </RelativeLayout>
