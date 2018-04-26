@@ -142,14 +142,38 @@ public class DiagnosisSearchFragment extends Fragment {
         chickenpox.add("red rashes");
         chickenpox.add("red blisters");
 
+        ArrayList<String> chronic_pancreatitis = new ArrayList<String>();
+        chronic_pancreatitis.add("abdominal pain");
+        chronic_pancreatitis.add("nausea");
+        chronic_pancreatitis.add("vomiting");
+
+        ArrayList<String> common_cold = new ArrayList<String>();
+        common_cold.add("sore throat");
+        common_cold.add("blocked nose");
+        common_cold.add("runny nose");
+        common_cold.add("sneezing");
+        common_cold.add("coughing");
+        common_cold.add("fever");
+        common_cold.add("headache");
+        common_cold.add("muscle ache");
+
+        ArrayList<String> constipation = new ArrayList<String>();
+        constipation.add("stomach ache");
+        constipation.add("bloated stomach");
+        constipation.add("loss of appetite");
+        constipation.add("nausea");
+
         /*Disease instances*/
         Disease heartAttack = new Disease("Heart attack", heart_attack);
         Disease foodPoisoning = new Disease("Food poisoning", food_poisoning);
         Disease heatStroke = new Disease("Heat stroke", heat_stroke);
-        Disease allergicReaction = new Disease("Allergic reactoin", allergic_reaction);
+        Disease allergicReaction = new Disease("Allergic reaction", allergic_reaction);
         Disease _arthritis = new Disease("Arthritis", arthritis);
         Disease bladderCancer = new Disease("Bladder cancer", bladder_cancer);
         Disease _bronchitis = new Disease("Bronchitis", bronchitis);
+        Disease chronicPancreatitis = new Disease("Chronic Pancreatitis", chronic_pancreatitis);
+        Disease commonCold = new Disease("Common Cold", common_cold);
+        Disease _constipation = new Disease("Constipation", constipation);
 
         /*Add disease instances to array list*/
         final ArrayList<Disease> diseases = new ArrayList<Disease>();
@@ -160,6 +184,9 @@ public class DiagnosisSearchFragment extends Fragment {
         diseases.add(_arthritis);
         diseases.add(bladderCancer);
         diseases.add(_bronchitis);
+        diseases.add(chronicPancreatitis);
+        diseases.add(commonCold);
+        diseases.add(_constipation);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,152 +221,6 @@ public class DiagnosisSearchFragment extends Fragment {
                 }
             }
         });
-
-//        send.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Fragment fragment = null;
-//
-//                fragment = new MedicalRecordFragment();
-//                String title = getString(R.string.title_medical_record);
-//
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.container_body, fragment);
-//                fragmentTransaction.commit();
-//
-//                // set the toolbar title
-//
-//                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
-//            }
-//        });
-
-//        CheckBox checkBox_cough = (CheckBox) rootView.findViewById(R.id.checkbox_cough);
-//        CheckBox checkBox_headache = (CheckBox) rootView.findViewById(R.id.checkbox_headache);
-//        CheckBox checkBox_flumps = (CheckBox) rootView.findViewById(R.id.checkbox_flumps);
-//        CheckBox checkBox_diarrhea = (CheckBox) rootView.findViewById(R.id.checkbox_diarrhea);
-//        CheckBox checkBox_indigestion = (CheckBox) rootView.findViewById(R.id.checkbox_indigestion);
-//        CheckBox checkBox_gloop = (CheckBox) rootView.findViewById(R.id.checkbox_gloop);
-//        CheckBox checkBox_heartburn = (CheckBox) rootView.findViewById(R.id.checkbox_heartburn);
-
-
-//        checkBox_cough.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()){
-//                    if(cough){
-//                        Toast toast = Toast.makeText(getActivity(), "You have a cough", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        cough = false;
-//                    }
-//                    else{
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have a cough", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        cough = true;
-//                    }
-//                }
-//            }
-//        });
-//        checkBox_headache.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()){
-//                    if(headache){
-//                        Toast toast = Toast.makeText(getActivity(), "You have a headache", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        headache = false;
-//                    }
-//                    else{
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have a headache", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        headache = true;
-//                    }
-//                }
-//            }
-//        });
-//        checkBox_flumps.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()){
-//                    if(flumps){
-//                        Toast toast = Toast.makeText(getActivity(), "You have a flumps", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        flumps = false;
-//                    }
-//                    else{
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have a flumps", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        flumps = true;
-//                    }
-//                }
-//            }
-//        });
-//        checkBox_diarrhea.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()){
-//                    if(diarrhea){
-//                        Toast toast = Toast.makeText(getActivity(), "You have diarrhea", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        diarrhea = false;
-//                    }
-//                    else{
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have diarrhea", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        diarrhea = true;
-//                    }
-//                }
-//            }
-//        });
-//        checkBox_indigestion.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()) {
-//                    if (indigestion) {
-//                        Toast toast = Toast.makeText(getActivity(), "You have indigestion", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        indigestion = false;
-//                    } else {
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have indigestion", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        indigestion = true;
-//                    }
-//                }
-//            }
-//        });
-//        checkBox_gloop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()) {
-//                    if (gloop) {
-//                        Toast toast = Toast.makeText(getActivity(), "You have a gloop", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        gloop = false;
-//                    } else {
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have a gloop", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        gloop = true;
-//                    }
-//                }
-//            }
-//        });
-//        checkBox_heartburn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.isEnabled()) {
-//                    if (heartburn) {
-//                        Toast toast = Toast.makeText(getActivity(), "You have heartburn", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        heartburn = false;
-//                    } else {
-//                        Toast toast = Toast.makeText(getActivity(), "You do not have heartburn", Toast.LENGTH_SHORT);
-//                        toast.show();
-//                        heartburn = true;
-//                    }
-//                }
-//            }
-//        });
-
 
         // Inflate the layout for this fragment
         return rootView;
