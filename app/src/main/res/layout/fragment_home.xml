@@ -3,76 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.login.mavmed.activity.HomeFragment"><![CDATA[
+    tools:context="com.example.login.mavmed.activity.HomeFragment">
 
-
-
-
-
-
-    " />
-
-
-
-
-
-    ]]>
-
-    <Button
-        android:id="@+id/diag_search"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/textView"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/doctor" />
-
-    <Button
-
-        android:id="@+id/MakeAppointment"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_alignTop="@+id/diag_search"
-        android:background="@drawable/images" />
-
-    <Button
-        android:id="@+id/Logout"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@+id/MedicalRecord"
-        android:layout_alignStart="@+id/reminders"
-        android:layout_below="@+id/reminders"
-        android:layout_marginTop="42dp"
-        android:background="@android:drawable/ic_lock_power_off" />
-
-    <Button
-        android:id="@+id/MedicalRecord"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/User_profile"
-        android:layout_below="@+id/User_profile"
-        android:layout_marginTop="42dp"
-        android:background="@drawable/download" />
-
-    <Button
-        android:id="@+id/reminders"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/MakeAppointment"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_centerVertical="true"
-        android:background="@android:drawable/ic_popup_reminder"
-        android:backgroundTint="@android:color/holo_orange_light" />
-
-    <Button
-        android:id="@+id/User_profile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignStart="@+id/diag_search"
-        android:layout_alignTop="@+id/reminders"
-        android:background="@drawable/ic_profile"
-        android:backgroundTint="@color/colorAccent" />
 
     <TextView
         android:id="@+id/textView"
@@ -80,101 +12,68 @@
         android:layout_height="47dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="MavMed"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="48dp"
         android:textSize="25dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:text="Welcome to MavMed!"
+        android:textAlignment="center" />
+" />
 
-    <EditText
-        android:id="@+id/appt_txt"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/diag_search"
+        android:layout_width="300dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Diagnosis Search" />
+
+    <Button
+
+        android:id="@+id/MakeAppointment"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/MakeAppointment"
+        android:layout_alignStart="@+id/User_profile"
+        android:layout_below="@+id/User_profile"
+        android:layout_marginTop="18dp"
+        android:text="Make Appointment" />
+
+    <Button
+        android:id="@+id/Logout"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_alignStart="@+id/MakeAppointment"
         android:layout_below="@+id/MakeAppointment"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="textPersonName"
-        android:text="Appointment"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="14sp" />
+        android:layout_marginTop="17dp"
+        android:text="Log Out" />
 
-    <EditText
-        android:id="@+id/logoff_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Logout"
-        android:layout_alignEnd="@+id/Logout"
-        android:layout_below="@+id/Logout"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="textPersonName"
-        android:text="Log Off"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="14sp" />
+    <Button
+        android:id="@+id/MedicalRecord"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
 
-    <EditText
-        android:id="@+id/diag_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/diag_search"
-        android:layout_alignStart="@+id/diag_search"
         android:layout_below="@+id/diag_search"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="textPersonName"
-        android:text="Diagnosis"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="14sp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Medical Record" />
 
-    <EditText
-        android:id="@+id/remind_txt"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/reminders"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/reminders"
-        android:layout_alignStart="@+id/reminders"
-        android:layout_below="@+id/reminders"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="textPersonName"
-        android:text="Reminders"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/prof_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/User_profile"
-        android:layout_alignStart="@+id/MedicalRecord"
-        android:layout_below="@+id/User_profile"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="textPersonName"
-        android:text="Profile"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/medrec_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/MedicalRecord"
         android:layout_alignStart="@+id/MedicalRecord"
         android:layout_below="@+id/MedicalRecord"
-        android:ems="10"
-        android:fontFamily="serif"
-        android:inputType="textPersonName"
-        android:text="Records"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="14sp" />
+        android:layout_marginTop="16dp"
+        android:text="Reminders" />
+
+    <Button
+        android:id="@+id/User_profile"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/reminders"
+        android:layout_below="@+id/reminders"
+        android:layout_marginTop="11dp"
+        android:text="User Profile" />
 
 </RelativeLayout>

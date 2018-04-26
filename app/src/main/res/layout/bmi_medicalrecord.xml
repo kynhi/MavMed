@@ -68,12 +68,13 @@
 
     <TextView
         android:id="@+id/tv_bmi"
+        android:text="BMI is:"
+        android:ems="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/et_heightin"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:text="BMI is:" />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/tv_result"
@@ -97,8 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/tv_condition"
-        android:layout_marginTop="117dp"
         android:background="@android:color/holo_blue_dark"
         android:text="Calculate BMI" />
 
@@ -108,7 +109,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button_bmiCalc"
-        android:layout_marginTop="21dp"
         android:background="@android:color/holo_blue_light"
         android:text="Done!" />
 </RelativeLayout>
