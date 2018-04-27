@@ -79,7 +79,6 @@ public class UserProfileFragment extends Fragment {
             }
         };
         mDatabase.addValueEventListener(postListener);
-
         setimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
