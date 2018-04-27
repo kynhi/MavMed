@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import static android.content.ContentValues.TAG;
+import static com.google.android.gms.internal.zzbfq.NULL;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String url = (String) dataSnapshot.getValue();
-                Log.d("MY URL",url);
                 loadImagefromUrl(url);
             }
 
@@ -102,17 +102,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     }
     private void loadImagefromUrl(String url){
-        Picasso.get().load(url).into(userIcon, new com.squareup.picasso.Callback() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        });
+            Picasso.get().load(url).into(userIcon);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
