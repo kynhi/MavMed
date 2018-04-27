@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -87,6 +88,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -105,6 +107,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -121,11 +124,9 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
                 // set the toolbar title
-
-
             }
         });
         userProfile.setOnClickListener(new View.OnClickListener() {
