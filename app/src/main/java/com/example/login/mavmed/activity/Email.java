@@ -34,24 +34,22 @@ public class Email extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_email, container, false);
 
         super.onCreate(savedInstanceState);
-
+        final EditText recipient = (EditText) rootView.findViewById(R.id.editText);
+        final EditText subject = (EditText) rootView.findViewById(R.id.editText2);
+        final EditText body = (EditText) rootView.findViewById(R.id.editText3);
         Button Compose = (Button) rootView.findViewById(R.id.sendbttn);
         Compose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                sendEmail();
+                sendEmail(recipient.getText().toString(),subject.getText().toString(),body.getText().toString());
             }
         });
         return rootView;
     }
 
-    protected void sendEmail() {
-        View mView = getLayoutInflater().inflate(R.layout.activity_email, null);
+    protected void sendEmail(String a, String b, String c) {
         Log.i("Send email", "");
 
-        EditText recipient = (EditText) mView.findViewById(R.id.editText);
-        EditText subject = (EditText) mView.findViewById(R.id.editText2);
-        EditText body = (EditText) mView.findViewById(R.id.editText3);
-        String[] TO = {recipient.getText().toString()};
+        String[] TO = {a};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
@@ -59,8 +57,8 @@ public class Email extends Fragment {
         emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
-        emailIntent.putExtra(Intent.EXTRA_TEXT, body.getText().toString());
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, b/*subject.getText().toString()*/);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, c/*body.getText().toString()*/);
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send email"));
