@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,11 +17,21 @@ import android.widget.Toast;
 
 import com.example.login.mavmed.R;
 import com.example.login.mavmed.adapter.ExpandableListAdapter2;
+import com.example.login.mavmed.data.MedicalRecord;
+import com.example.login.mavmed.data.UserData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 
 
 public class MedicalRecordFragment extends Fragment {
@@ -30,7 +41,10 @@ public class MedicalRecordFragment extends Fragment {
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
     int category=0;
-
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseUser user = auth.getCurrentUser();
+    String userID = user.getUid();
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(); //database ref for add queries
     public MedicalRecordFragment() {
         // Required empty public constructor
     }
@@ -50,23 +64,62 @@ public class MedicalRecordFragment extends Fragment {
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
+
+
+
         listDataHeader.add("Allergies");
         listDataHeader.add("Immunization");
         listDataHeader.add("Medication");
-        final List<String> allergies = new ArrayList<>();
-        final List<String> immune = new ArrayList<>();
-        final List<String> med = new ArrayList<>();
+         final List<String> allergies = new ArrayList<>();
+         allergies.add("Your Allergies");
+         final List<String> immune = new ArrayList<>();
+         immune.add("Your Immnunization");
+         final List<String> med = new ArrayList<>();
+         med.add("Your Medication");
         listHash.put(listDataHeader.get(0),allergies);
         listHash.put(listDataHeader.get(1),immune);
         listHash.put(listDataHeader.get(2),med);
+        //MedicalRecord newMed = new MedicalRecord(allergies,immune,med);
+        //mDatabase.child("users").child(userID).child("Medical Record").setValue(newMed);
+//        allergies.add("Peanut");
+//        allergies.add("Siracha");
+//        immune.add("Cheese");
+//        immune.add("Bugs");
+//        med.add("icecream");
+//        med.add("cookies");
+        DatabaseReference mDatabaseRead = FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("Medical Record"); //database ref for read values
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                allergies.clear();
+                immune.clear();
+                med.clear();
 
-        allergies.add("Peanut");
-        allergies.add("Siracha");
-        immune.add("Cheese");
-        immune.add("Bugs");
-        med.add("icecream");
-        med.add("cookies");
+                MedicalRecord medicalinfo = dataSnapshot.getValue(MedicalRecord.class);
+                if (medicalinfo!= null ) {
+                    if (medicalinfo.getAllergies() != null) {
+                        allergies.addAll(medicalinfo.getAllergies());
+                    }
+                    if (medicalinfo.getImmune() != null) {
+                        immune.addAll((List) medicalinfo.getImmune());
+                    }
+                    if (medicalinfo.getMed() != null) {
+                        med.addAll((List) medicalinfo.getMed());
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(getActivity(), "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            }
+        };
+        mDatabaseRead.addValueEventListener(postListener);
 
         listAdapter = new ExpandableListAdapter2(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
@@ -154,10 +207,11 @@ public class MedicalRecordFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
 
+
                         // get catogory variable from Main Activity
                         MainActivity activity = (MainActivity) getActivity();
                         category = activity.getCategory();
-                        Log.d("MEdicalRecordFragment","Category" + Integer.toString(category));
+                        Log.d("MedicalRecordFragment","Category" + Integer.toString(category));
 
                         if (!inputname.getText().toString().isEmpty() && category == 0) {
                             Toast.makeText(getActivity(),
@@ -165,24 +219,28 @@ public class MedicalRecordFragment extends Fragment {
                             allergies.add(inputname.getText().toString());
                             inputname.setText(null); // reset input text after sucessfully added
                             listAdapter.notifyDataSetChanged(); //refresh the list view data
-
+                            //mDatabase.child("users").child(userID).child("Medical Record").push().setValue(allergies);
                         } else if (!inputname.getText().toString().isEmpty() && category == 1) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             immune.add(inputname.getText().toString());
                             inputname.setText(null);
                             listAdapter.notifyDataSetChanged();
-
+                            //mDatabase.child("users").child(userID).child("Medical Record").child("immune").push().setValue(immune.get(immune.size()-1));
                         } else if (!inputname.getText().toString().isEmpty() && category == 2) {
                             Toast.makeText(getActivity(),
                                     "New Medical Record Added!", Toast.LENGTH_LONG).show();
                             med.add(inputname.getText().toString());
+                            //mDatabase.child("users").child(userID).child("Medical Record").child("med").push().setValue(med.get(med.size()-1));
                             inputname.setText(null);
                             listAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(),
                                     "Please Fill in Empty Field", Toast.LENGTH_LONG).show();
                         }
+                        MedicalRecord newMed = new MedicalRecord(allergies,immune,med);
+                        mDatabase.child("users").child(userID).child("Medical Record").removeValue();
+                        mDatabase.child("users").child(userID).child("Medical Record").setValue(newMed);
                     }
                 });
                 mBuilder.setView(mView);
