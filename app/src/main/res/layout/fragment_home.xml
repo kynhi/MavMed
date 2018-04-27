@@ -12,7 +12,7 @@
         android:layout_height="47dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:textSize="25dp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
@@ -80,5 +80,6 @@
         android:layout_below="@+id/reminders"
         android:layout_marginTop="11dp"
         android:text="User Profile" />
+
 
 </RelativeLayout>
