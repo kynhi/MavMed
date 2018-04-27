@@ -186,6 +186,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                if(marker.isInfoWindowShown()) {
+                    marker.hideInfoWindow();
+                } else {
+                    marker.showInfoWindow();
+                }
                 doctorName.setText(marker.getTitle());
                 doctorAddress.setText(marker.getSnippet());
                 //doc_tel = marker.getSnippet();
