@@ -15,6 +15,7 @@
             android:id="@+id/userIC"
             android:layout_width="230dp"
             android:layout_height="130dp"
+            android:src="@drawable/ic_profile"
             android:scaleType="fitCenter"
             android:layout_centerInParent="true" />
 
