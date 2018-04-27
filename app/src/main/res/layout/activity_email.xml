@@ -31,9 +31,11 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/editText3"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="5"
         android:layout_below="@+id/editText2"
         android:layout_alignRight="@+id/editText2"
         android:layout_alignEnd="@+id/editText2" />
@@ -57,20 +59,20 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="subject"
-        android:id="@+id/textView2"
         android:layout_alignBottom="@+id/editText2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="Subject" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Message Body"
-        android:id="@+id/textView3"
         android:layout_alignBottom="@+id/editText3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="Message" />
 </RelativeLayout>
