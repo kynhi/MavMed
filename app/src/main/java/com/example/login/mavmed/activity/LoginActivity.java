@@ -27,8 +27,6 @@ public class LoginActivity extends Activity {
 
     Button login,register,skip,forgetpassword;
     EditText email,password;
-
-
     TextView attempts_count;
     int counter = 3;
     private SQLiteDatabase myDb; //my Database
@@ -54,7 +52,6 @@ public class LoginActivity extends Activity {
         forgetpassword = (Button) findViewById(R.id.Forget_password);
         email = (EditText)findViewById(R.id.Email);
         password = (EditText)findViewById(R.id.Password);
-
         skip = (Button)findViewById(R.id.Override);
         register = (Button)findViewById(R.id.Register);
         attempts_count = (TextView)findViewById(R.id.Counter);
@@ -75,16 +72,11 @@ public class LoginActivity extends Activity {
                 PasswordHolder = password.getText().toString();
                 // Checking EditText is empty or no using TextUtils.
                 if (TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)) {
-
                     EditTextEmptyHolder = false;
-
                 } else {
-
                     EditTextEmptyHolder = true;
                 }
-
                 if (EditTextEmptyHolder) {
-
                     LoginFunction();
                 } else {
                     Toast.makeText(LoginActivity.this, "Please Enter UserName or Password.", Toast.LENGTH_LONG).show();
@@ -138,10 +130,8 @@ public class LoginActivity extends Activity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         // If task done Successful.
                         if(task.isSuccessful()) {
-
                             // Hiding the progress dialog.
                             progressDialog.dismiss();
                             FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -157,10 +147,8 @@ public class LoginActivity extends Activity {
                             }
                         }
                         else {
-
                             // Hiding the progress dialog.
                             progressDialog.dismiss();
-
                             // Showing toast message when email or password not found in Firebase Online database.
                             Toast.makeText(LoginActivity.this, "Email or Password Not found, Please Try Again", Toast.LENGTH_LONG).show();
                             attempts_count.setVisibility(View.VISIBLE);

@@ -63,18 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 // Checking EditText is empty or Not.
                 CheckEditTextStatus();
-
                 // Method to check Email is already exists or not.
                 InsertDataIntoFirebase();
-
                 // Empty EditText After done inserting process.
-                EmptyEditTextAfterDataInsert();
-
-
+                //EmptyEditTextAfterDataInsert();
             }
         });
     }
@@ -84,30 +78,24 @@ public class RegisterActivity extends AppCompatActivity {
         // If editText is not empty then this block will executed.
         if(EditTextEmptyHolder == true)
         {
-
-
             UserRegistrationFunction();
-
         }
         // This block will execute if any of the registration EditText is empty.
         else {
-
             // Printing toast message if any of EditText is empty.
             Toast.makeText(RegisterActivity.this,"Please Fill All The Required Fields.", Toast.LENGTH_LONG).show();
-
         }
-
     }
 
     // Empty edittext after done inserting process method.
-    public void EmptyEditTextAfterDataInsert(){
+/*    public void EmptyEditTextAfterDataInsert(){
 
         Email.getText().clear();
         Birthday.getText().clear();
         Password.getText().clear();
         Name.getText().clear();
 
-    }
+    }*/
     // Method to check EditText is empty or Not.
     public void CheckEditTextStatus(){
 
@@ -148,7 +136,6 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Printing toast message after done inserting.
                             Toast.makeText(RegisterActivity.this,"User Registered Successfully, Check Email for Confirmation", Toast.LENGTH_LONG).show();
-
                             FirebaseAuth auth = FirebaseAuth.getInstance();
                             FirebaseUser user = auth.getCurrentUser();
                             user.sendEmailVerification()
@@ -167,7 +154,6 @@ public class RegisterActivity extends AppCompatActivity {
                             String userID = user.getUid();
                             mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child("users").child(userID).setValue(newuser);
-
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {

@@ -9,7 +9,9 @@
         android:id="@+id/lblListHeader"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="16dp"
-        android:textColor="@android:color/holo_blue_dark"
+        android:text="Record Titles"
+        android:textColor="@color/textColorPrimary"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

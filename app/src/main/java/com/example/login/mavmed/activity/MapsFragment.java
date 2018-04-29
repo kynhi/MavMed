@@ -78,6 +78,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     double longitude;
     private int PROXIMITY_RADIUS = 10000;
 
+    Button call_doc,pickDate;
     String doctor_name = null;
     String doctor_address = null;
     String doc_tel = null;
@@ -99,9 +100,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         // Set the map ready callback to receive the GoogleMap object
         mapView.getMapAsync(this);
 
-        Button call_doc = (Button) view.findViewById(R.id.call_doc);
+        call_doc = (Button) view.findViewById(R.id.call_doc);
 
-        Button pickDate = (Button) view.findViewById(R.id.bt_pick_date);
+        pickDate = (Button) view.findViewById(R.id.bt_pick_date);
+        call_doc.setEnabled(false);
+        pickDate.setEnabled(false);
         pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +194,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 } else {
                     marker.showInfoWindow();
                 }
+                call_doc.setEnabled(true);
+                pickDate.setEnabled(true);
                 doctorName.setText(marker.getTitle());
                 doctorAddress.setText(marker.getSnippet());
                 //doc_tel = marker.getSnippet();
