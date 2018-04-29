@@ -13,6 +13,8 @@
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
+        android:text="Record Items"
+        android:textColor="@color/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <ImageView
