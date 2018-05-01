@@ -18,7 +18,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:ems="10"
+<<<<<<< HEAD
+=======
         android:textColorHint="@color/colorPrimary"
+>>>>>>> master
         android:textAlignment="center"
         android:hint="Weight"
         android:inputType="numberDecimal" />
@@ -31,7 +34,10 @@
         android:id="@+id/et_heightft"
         android:hint="Height (ft)"
         android:textAlignment="center"
+<<<<<<< HEAD
+=======
         android:textColorHint="@color/colorPrimary"
+>>>>>>> master
         android:layout_below="@+id/et_weight"
         android:layout_alignRight="@+id/et_weight"
         android:layout_alignEnd="@+id/et_weight" />
@@ -44,7 +50,10 @@
         android:id="@+id/et_heightin"
         android:textAlignment="center"
         android:hint="Height (inches)"
+<<<<<<< HEAD
+=======
         android:textColorHint="@color/colorPrimary"
+>>>>>>> master
         android:layout_below="@+id/et_heightft"
         android:layout_alignRight="@+id/et_heightft"
         android:layout_alignEnd="@+id/et_heightft" />

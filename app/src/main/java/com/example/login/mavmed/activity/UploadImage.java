@@ -4,6 +4,17 @@ package com.example.login.mavmed.activity;
  * Created by Nhi K luong on 4/26/2018.
  */
 
+<<<<<<< HEAD
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+=======
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -23,6 +34,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+>>>>>>> master
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -43,11 +55,15 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+<<<<<<< HEAD
+import java.io.IOException;
+=======
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+>>>>>>> master
 
 public class UploadImage extends AppCompatActivity {
 
@@ -58,7 +74,11 @@ public class UploadImage extends AppCompatActivity {
     String Database_Path = "All_Image_Uploads_Database";
 
     // Creating button.
+<<<<<<< HEAD
+    Button ChooseButton, UploadButton;
+=======
     Button ChooseButton, UploadButton, TakePictureButton;
+>>>>>>> master
 
     // Creating EditText.
     EditText ImageName ;
@@ -94,9 +114,12 @@ public class UploadImage extends AppCompatActivity {
         //Assign ID'S to button.
         ChooseButton = (Button)findViewById(R.id.ButtonChooseImage);
         UploadButton = (Button)findViewById(R.id.ButtonUploadImage);
+<<<<<<< HEAD
+=======
         TakePictureButton = (Button) findViewById(R.id.TakePicture);
 
 
+>>>>>>> master
 
         // Assign ID's to EditText.
         ImageName = (EditText)findViewById(R.id.ImageNameEditText);
@@ -134,6 +157,11 @@ public class UploadImage extends AppCompatActivity {
 
             }
         });
+<<<<<<< HEAD
+    }
+
+    @Override
+=======
 
         TakePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +214,7 @@ public class UploadImage extends AppCompatActivity {
 
 
     @Override
+>>>>>>> master
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -211,6 +240,10 @@ public class UploadImage extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+<<<<<<< HEAD
+    }
+
+=======
         if (requestCode == 100&& resultCode == RESULT_OK) {
             try {
 
@@ -238,6 +271,7 @@ public class UploadImage extends AppCompatActivity {
     }
 
     ///
+>>>>>>> master
     // Creating Method to get the selected image file Extension from File Path URI.
     public String GetFileExtension(Uri uri) {
 

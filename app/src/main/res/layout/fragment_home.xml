@@ -2,6 +2,94 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+<<<<<<< HEAD
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.login.mavmed.activity.HomeFragment">
+
+
+    <ImageView
+        android:id="@+id/Welcome"
+        android:layout_width="278dp"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/welcome"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/diag_search"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        android:layout_alignStart="@+id/User_profile"
+        android:layout_below="@+id/Welcome"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/diagnosis"
+        android:gravity="top" />
+
+
+    <Button
+
+        android:id="@+id/MakeAppointment"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/email"
+        android:layout_alignStart="@+id/User_profile"
+        android:background="@drawable/appointment" />
+
+    <Button
+        android:id="@+id/Logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/logout"
+        />
+
+    <Button
+        android:id="@+id/MedicalRecord"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+
+        android:layout_alignStart="@+id/email"
+        android:layout_alignTop="@+id/User_profile"
+        android:background="@drawable/medical_record" />
+
+    <Button
+        android:id="@+id/reminders"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTintMode="src_atop"
+
+        android:layout_alignStart="@+id/email"
+        android:layout_alignTop="@+id/diag_search"
+        android:background="@drawable/reminder" />
+
+    <Button
+        android:id="@+id/User_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignStart="@+id/Welcome"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="13dp"
+        android:background="@drawable/user_profile" />
+
+    <Button
+        android:id="@+id/email"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        android:layout_above="@+id/Logout"
+        android:layout_alignEnd="@+id/Welcome"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/message" />
+
+</RelativeLayout>
+=======
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -163,3 +251,4 @@
 
     </RelativeLayout>
 </ScrollView>
+>>>>>>> master
