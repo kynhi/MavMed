@@ -4,15 +4,25 @@ package com.example.login.mavmed.activity;
  * Created by Nhi K luong on 4/26/2018.
  */
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -33,7 +43,11 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UploadImage extends AppCompatActivity {
 
@@ -44,7 +58,7 @@ public class UploadImage extends AppCompatActivity {
     String Database_Path = "All_Image_Uploads_Database";
 
     // Creating button.
-    Button ChooseButton, UploadButton;
+    Button ChooseButton, UploadButton, TakePictureButton;
 
     // Creating EditText.
     EditText ImageName ;
@@ -80,6 +94,9 @@ public class UploadImage extends AppCompatActivity {
         //Assign ID'S to button.
         ChooseButton = (Button)findViewById(R.id.ButtonChooseImage);
         UploadButton = (Button)findViewById(R.id.ButtonUploadImage);
+        TakePictureButton = (Button) findViewById(R.id.TakePicture);
+
+
 
         // Assign ID's to EditText.
         ImageName = (EditText)findViewById(R.id.ImageNameEditText);
@@ -117,7 +134,56 @@ public class UploadImage extends AppCompatActivity {
 
             }
         });
+
+        TakePictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Calling method to upload selected image on Firebase storage.
+                takePicture();
+            }
+        });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            TakePictureButton.setEnabled(false);
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                TakePictureButton.setEnabled(true);
+            }
+        }
+    }
+
+    public void takePicture() {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        FilePathUri = Uri.fromFile(getOutputMediaFile());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, FilePathUri);
+        startActivityForResult(intent, 100);
+    }
+
+    private static File getOutputMediaFile(){
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "CameraDemo");
+
+        if (!mediaStorageDir.exists()){
+            if (!mediaStorageDir.mkdirs()){
+                Log.d("CameraDemo", "failed to create directory");
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_"+ timeStamp + ".jpg");
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -145,8 +211,33 @@ public class UploadImage extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        if (requestCode == 100&& resultCode == RESULT_OK) {
+            try {
+
+                Bitmap img = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
+                Matrix matrix = new Matrix();
+                matrix.postRotate(270);
+                Bitmap rotatedImg = Bitmap.createBitmap(img, 0,
+                        0, img.getWidth(), img.getHeight(), matrix, true);
+                img.recycle();
+                //bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
+                FilePathUri = getImageUri(this,rotatedImg);
+                SelectImage.setImageBitmap(rotatedImg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(),
+                inImage, "Title", null);
+        return Uri.parse(path);
     }
 
+    ///
     // Creating Method to get the selected image file Extension from File Path URI.
     public String GetFileExtension(Uri uri) {
 
