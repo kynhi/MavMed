@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText Email, Password, Name ,Birthday;
-    Button Register;
+    Button Register, Back;
     String NameHolder, EmailHolder, PasswordHolder, BirthdayHolder,GenderHolder;
     Boolean EditTextEmptyHolder;
     RadioGroup Gender;
@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Register = (Button)findViewById(R.id.buttonRegister);
-
+        Back = (Button) findViewById(R.id.back);
         //radio group button for gender
 
         Name = (EditText) findViewById(R.id.editFullname);
@@ -69,6 +69,16 @@ public class RegisterActivity extends AppCompatActivity {
                 InsertDataIntoFirebase();
                 // Empty EditText After done inserting process.
                 //EmptyEditTextAfterDataInsert();
+<<<<<<< HEAD
+=======
+            }
+        });
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+>>>>>>> master
             }
         });
     }
