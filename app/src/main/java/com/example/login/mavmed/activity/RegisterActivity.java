@@ -69,8 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
                 InsertDataIntoFirebase();
                 // Empty EditText After done inserting process.
                 //EmptyEditTextAfterDataInsert();
-<<<<<<< HEAD
-=======
             }
         });
         Back.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
->>>>>>> master
             }
         });
     }
