@@ -40,11 +40,7 @@
     <EditText
         android:id="@+id/Email"
         android:layout_width="281dp"
-<<<<<<< HEAD
-        android:layout_height="49dp"
-=======
         android:layout_height="30dp"
->>>>>>> master
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -68,11 +64,7 @@
     <EditText
         android:id="@+id/Password"
         android:layout_width="282dp"
-<<<<<<< HEAD
-        android:layout_height="48dp"
-=======
         android:layout_height="30dp"
->>>>>>> master
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -90,11 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.479" />
-=======
         app:layout_constraintVertical_bias="0.456" />
->>>>>>> master
 
     <TextView
         android:id="@+id/Attempts"
@@ -112,11 +100,7 @@
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.599" />
-=======
         app:layout_constraintVertical_bias="0.56" />
->>>>>>> master
 
     <TextView
         android:id="@+id/Counter"
@@ -130,71 +114,38 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
-=======
         app:layout_constraintHorizontal_bias="0.832"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.555" />
->>>>>>> master
 
     <Button
         android:id="@+id/Login"
         android:layout_width="203dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-<<<<<<< HEAD
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-=======
->>>>>>> master
         android:background="@drawable/buttonshape"
         android:text="login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.237"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.735" />
-=======
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.662" />
->>>>>>> master
 
     <Button
         android:id="@+id/Register"
         android:layout_width="203dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-<<<<<<< HEAD
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-=======
->>>>>>> master
         android:background="@drawable/buttonshape"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.795"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.735" />
-=======
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.777" />
->>>>>>> master
 
     <ImageView
         android:id="@+id/imageView2"
@@ -216,11 +167,6 @@
         android:id="@+id/Override"
         android:layout_width="199dp"
         android:layout_height="43dp"
-<<<<<<< HEAD
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="8dp"
-=======
->>>>>>> master
         android:background="@drawable/buttonshape"
         android:text="Override"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -235,25 +181,13 @@
         android:layout_width="203dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-<<<<<<< HEAD
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/buttonshape"
-        android:text="Forget Password"
-=======
         android:background="@drawable/buttonshape"
         android:text="Forget Password?"
->>>>>>> master
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.86" />
-=======
         app:layout_constraintVertical_bias="0.884" />
->>>>>>> master
 
 </android.support.constraint.ConstraintLayout>
