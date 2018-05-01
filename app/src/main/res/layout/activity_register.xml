@@ -15,29 +15,38 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="Register New User"
-        android:textColor="#000"
-        android:textSize="20dp" />
-
+        android:textColor="@color/textColorPrimary"
+        android:textSize="35dp" />
 
     <EditText
+        android:backgroundTint="@color/wallet_highlighted_text_holo_dark"
+        android:background="@color/textBoxColor"
         android:id="@+id/editFullname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColorHint="@color/textColorPrimary"
+        android:textColor="@color/textColorPrimary"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/titleText"
         android:layout_marginTop="38dp"
         android:hint="Enter Your Full Name" />
 
     <EditText
+        android:backgroundTint="@color/wallet_highlighted_text_holo_dark"
+        android:background="@color/textBoxColor"
         android:id="@+id/editEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editFullname"
+        android:textColorHint="@color/textColorPrimary"
+        android:textColor="@color/textColorPrimary"
         android:layout_marginTop="24dp"
         android:hint="Enter Email"
+        android:inputType="textEmailAddress"
         android:gravity="center"/>
 
     <EditText
@@ -46,67 +55,88 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editEmail"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="23dp"
+        android:background="@color/textBoxColor"
+        android:backgroundTint="@color/wallet_highlighted_text_holo_dark"
         android:gravity="center"
+        android:hint="Enter Date of Birth"
         android:inputType="date"
-        android:hint="Enter Date of Birth" />
+        android:textColor="@color/textColorPrimary"
+        android:textColorHint="@color/textColorPrimary" />
 
     <EditText
+        android:backgroundTint="@color/wallet_highlighted_text_holo_dark"
+        android:background="@color/textBoxColor"
         android:id="@+id/editPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editBirthday"
         android:layout_marginTop="24dp"
+        android:textColorHint="@color/textColorPrimary"
+        android:textColor="@color/textColorPrimary"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter Password"
         android:inputType="textPassword"
-        android:textColor="#000"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="210dp" />
+
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/radioGroup"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
         android:layout_above="@id/buttonRegister"
         >
+
         <RadioButton
             android:id="@+id/other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male"
-            android:checked="true"/>
+            android:checked="true"
+            android:textColor="@color/textColorPrimary"
+            android:text="Male" />
         <RadioButton
             android:id="@+id/male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColorPrimary"
             android:text="Female"
             android:checked="false"/>
         <RadioButton
             android:id="@+id/female"
+            android:textColor="@color/textColorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Other"
             android:checked="false"/>
     </RadioGroup>
 
-
-
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp"
+        android:layout_above="@+id/back"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/buttonshape"
         android:text="Create New Account "
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="281dp" />
 
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/buttonshape"
+        android:text="Back" />
 
 
 </RelativeLayout>

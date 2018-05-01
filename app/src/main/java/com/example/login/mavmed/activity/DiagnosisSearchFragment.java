@@ -1,24 +1,22 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.Snackbar;
+import android.media.Image;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
@@ -30,200 +28,188 @@ import java.util.List;
 
 public class DiagnosisSearchFragment extends Fragment {
 
-    private ExpandableListView listView;
-    private ExpandableListAdapter listAdapter;
-    private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHash;
+    private DatabaseHelper db;
+    long id_num;
+    String query;
 
-    boolean[] result = new boolean[7];
-    boolean cough = true;
-    boolean headache = true;
-    boolean heartburn = true;
-    boolean diarrhea = true;
-    boolean flumps = true;
-    boolean gloop = true;
-    boolean indigestion = true;
+    List<Row> possible_diseases;
+    List<Row> all_symptoms;
+    List<String> strings;
+    List<Row> symptoms_for_this_disease;
+    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> listItems = new ArrayList<String>();
 
-    public DiagnosisSearchFragment() {
-        // Required empty public constructor
+    int count = 0; //counter
+
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+
+    public DiagnosisSearchFragment(){
+
     }
-
-    private TextWatcher textWatcher = new TextWatcher() {
-
-        public void afterTextChanged(Editable s) {
-//            Message.message(getContext(), "text has changed");
-        }
-
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            Message.message(getContext(), "text has not been changed");
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-//            Message.message(getContext(), "text is being changed");
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //SearchDatabaseAdapter searchDatabaseHelper = new SearchDatabaseAdapter(getContext());
-        //SQLiteDatabase db = searchDatabaseHelper.getWritableDatabase();
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                  Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.symptom_searcher, container, false);
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_diagnosissearch, container, false);
 
-        Button send = (Button) rootView.findViewById(R.id.senddiagsearch);
-        Button search = (Button) rootView.findViewById(R.id.searchButton);
-        final EditText searchBox = (EditText) rootView.findViewById(R.id.searchBox);
-        final TextView diseaseList = (TextView) rootView.findViewById(R.id.diseaseList);
-        searchBox.addTextChangedListener(textWatcher);
+        //        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
+//        ListView listView = (ListView) findViewById(R.id.my_list_view);
+//        listView.setAdapter(adapter);
 
-        /*Expandable list stuff*/
-        listView = (ExpandableListView)rootView.findViewById(R.id.symptom_expand);
-        listDataHeader = new ArrayList<>();
-        listHash = new HashMap<>();
+        // get the listview
+        expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 
-        /*List of diseases and symptoms*/
-        ArrayList<String> heart_attack = new ArrayList<String>();
-        heart_attack.add("chest pain");
-        heart_attack.add("extreme weakness");
-        heart_attack.add("anxiety");
-        heart_attack.add("shortness of breath");
-        heart_attack.add("irregular heartbeat");
+        final Context context = this.getContext();
 
-        ArrayList<String> food_poisoning = new ArrayList<String>();
-        food_poisoning.add("diarrhea");
-        food_poisoning.add("nausea");
-        food_poisoning.add("vomiting");
-        food_poisoning.add("fever");
-        food_poisoning.add("muscle aches");
+        boolean create_db = false;
 
-        ArrayList<String> heat_stroke = new ArrayList<String>();
-        heat_stroke.add("throbbing headache");
-        heat_stroke.add("dizziness");
-        heat_stroke.add("red skin");
-        heat_stroke.add("hot skin");
-        heat_stroke.add("dry skin");
+//        Button button = (Button) rootView.findViewById(R.id.search_button);
+        Button query_add = (Button) rootView.findViewById(R.id.query_add);
+        Button search_multi = (Button) rootView.findViewById(R.id.search_multi);
+        Button clear_list = (Button) rootView.findViewById(R.id.clear_list);
+        ImageButton clear_text = (ImageButton) rootView.findViewById(R.id.clear_text);
+        final ListView symptoms = (ListView) rootView.findViewById(R.id.symptoms);
 
-        ArrayList<String> allergic_reaction = new ArrayList<String>();
-        allergic_reaction.add("sneezing");
-        allergic_reaction.add("itchy eyes");
-        allergic_reaction.add("red eyes");
-        allergic_reaction.add("watering eyes");
-        allergic_reaction.add("tightness in chest");
-        allergic_reaction.add("swelling");
-        allergic_reaction.add("dry skin");
-        allergic_reaction.add("red skin");
+        /*Get a new database helper*/
+        db = new DatabaseHelper(context);
 
-        ArrayList<String> arthritis = new ArrayList<String>();
-        arthritis.add("joint pain");
-        arthritis.add("joint inflammation");
-        arthritis.add("weakness");
-        arthritis.add("joint restricted movement");
+        if (create_db) {
 
-        ArrayList<String> bladder_cancer = new ArrayList<String>();
-        bladder_cancer.add("blood in urine");
-        bladder_cancer.add("frequent urination");
-        bladder_cancer.add("burning urination");
+        /*Add symptoms to the database*/        /*S_ID*/
+            db.insertSymptom("vomiting");       //1
+            db.insertSymptom("cough");          //2
+            db.insertSymptom("runny nose");     //3
+            db.insertSymptom("sore throat");    //4
 
-        ArrayList<String> bronchitis = new ArrayList<String>();
-        bronchitis.add("hacking cough");
-        bronchitis.add("yellow-grey mucus in cough");
-        bronchitis.add("sore throat");
-        bronchitis.add("runny nose");
-        bronchitis.add("aches and pains");
-        bronchitis.add("tiredness");
+                                                /*D_ID*/
+            db.insertDisease("common cold");    //1
+            db.insertDisease("cancer");         //2
+            db.insertDisease("the flu");        //3
 
-        ArrayList<String> chickenpox = new ArrayList<String>();
-        chickenpox.add("red rashes");
-        chickenpox.add("red blisters");
+            db.insertSymptomToDisease(1, 1);
+            db.insertSymptomToDisease(2, 1);
+            db.insertSymptomToDisease(1, 2);
+            db.insertSymptomToDisease(1, 3);
 
-        ArrayList<String> chronic_pancreatitis = new ArrayList<String>();
-        chronic_pancreatitis.add("abdominal pain");
-        chronic_pancreatitis.add("nausea");
-        chronic_pancreatitis.add("vomiting");
+        }
 
-        ArrayList<String> common_cold = new ArrayList<String>();
-        common_cold.add("sore throat");
-        common_cold.add("blocked nose");
-        common_cold.add("runny nose");
-        common_cold.add("sneezing");
-        common_cold.add("coughing");
-        common_cold.add("fever");
-        common_cold.add("headache");
-        common_cold.add("muscle ache");
 
-        ArrayList<String> constipation = new ArrayList<String>();
-        constipation.add("stomach ache");
-        constipation.add("bloated stomach");
-        constipation.add("loss of appetite");
-        constipation.add("nausea");
+//        query = "vomiting"; //might break without this
+//        possible_diseases = db.getDiseases(query);
+        all_symptoms = db.getAllSymptoms(); //for suggested search
 
-        /*Disease instances*/
-        Disease heartAttack = new Disease("Heart attack", heart_attack);
-        Disease foodPoisoning = new Disease("Food poisoning", food_poisoning);
-        Disease heatStroke = new Disease("Heat stroke", heat_stroke);
-        Disease allergicReaction = new Disease("Allergic reaction", allergic_reaction);
-        Disease _arthritis = new Disease("Arthritis", arthritis);
-        Disease bladderCancer = new Disease("Bladder cancer", bladder_cancer);
-        Disease _bronchitis = new Disease("Bronchitis", bronchitis);
-        Disease chronicPancreatitis = new Disease("Chronic Pancreatitis", chronic_pancreatitis);
-        Disease commonCold = new Disease("Common Cold", common_cold);
-        Disease _constipation = new Disease("Constipation", constipation);
+        for (Row row : all_symptoms) { //for suggested search
+            list.add(row.get_s_name());
+//            Message.message(this, "adding " + row.get_s_name());
+        }
 
-        /*Add disease instances to array list*/
-        final ArrayList<Disease> diseases = new ArrayList<Disease>();
-        diseases.add(heartAttack);
-        diseases.add(foodPoisoning);
-        diseases.add(heatStroke);
-        diseases.add(allergicReaction);
-        diseases.add(_arthritis);
-        diseases.add(bladderCancer);
-        diseases.add(_bronchitis);
-        diseases.add(chronicPancreatitis);
-        diseases.add(commonCold);
-        diseases.add(_constipation);
+        //for suggested search
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, list);
+        final AutoCompleteTextView editText = (AutoCompleteTextView) rootView.findViewById(R.id.search_text);
+        editText.setAdapter(adapter);
+        editText.setThreshold(1);
 
-        search.setOnClickListener(new View.OnClickListener() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        /*For multiquery*/
+        final ArrayList<String> multi_q = new ArrayList<>();
+
+        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, multi_q);
+        symptoms.setAdapter(adapter2);
+
+//        final ArrayAdapter<String> finalAdapter = adapter;
+        /*symptoms.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = list.get(position);
+                list.remove(position);
+                finalAdapter.notifyDataSetChanged();
+                Toast.makeText(getActivity(), "You selected : " + item, Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+        clear_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean not_there = false;
+                multi_q.clear();
                 listDataHeader.clear();
-                listHash.clear();
-                String symptom = searchBox.getText().toString();
-                int count = -1;
-                diseaseList.setText(null);
+                listDataChild.clear();
+                adapter2.notifyDataSetChanged();
+                Message.message(context, "cleared list");
 
-                /*Iterating over disease list*/
-                for(Disease dis: diseases) {
-                    if(dis.query(symptom) || dis.name.equalsIgnoreCase(symptom)) //tells us if the disease has this symptom
-                    {
-                        ++count;
-                        listDataHeader.add(dis.name);
-                        final List<String> list = new ArrayList<>();
-                        listHash.put(listDataHeader.get(count),list);
-                        list.addAll(dis.symptoms);
-                    }
-                    else{   //the query does not match anything in the arraylist
-                        not_there = true;
-                    }
-                }
-                listAdapter = new ExpandableListAdapter(getContext(),listDataHeader,listHash);
-                listView.setAdapter(listAdapter);
-                if(not_there){
-                    Toast toast = new Toast(getContext());
-                    toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
-                    toast.makeText(getContext(), "Sorry, I don't recognize any disease related to \"" + symptom + "\"", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        query_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                multi_q.add(editText.getText().toString().trim().toLowerCase());
+                adapter2.notifyDataSetChanged();
+                for (String s : multi_q) {
+                    Message.message(context, "contains " + s);
                 }
             }
         });
 
-        // Inflate the layout for this fragment
+        clear_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("");
+            }
+        });
+
+        search_multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!multi_q.isEmpty()) {
+                    count = 0;
+                    listDataHeader.clear();
+                    listDataChild.clear();
+
+                    possible_diseases = db.getDiseasesMulti(multi_q);
+
+                    for (Row row : possible_diseases) {    //possible_diseases contains all diseases connected to the query
+
+                    /*Parent header name*/
+                        listDataHeader.add(row.get_d_name());
+
+                    /*Create child list*/
+                        List<String> symptoms_to_strings = new ArrayList<>();
+
+                        symptoms_for_this_disease = db.getSymptomsByDisease(row.get_d_name()); //gets all symptoms connected to this disease
+
+                    /*Convert all rows into strings to add to the child list*/
+                        for (Row subrow : symptoms_for_this_disease) {
+                            symptoms_to_strings.add(subrow.get_s_name());
+                        }
+                    /*-----------------*/
+
+                        listDataChild.put(listDataHeader.get(count++), symptoms_to_strings); // Header, Child data
+
+                    }
+
+                    listAdapter = new ExpandableListAdapter(context, listDataHeader, listDataChild);
+
+                    // setting list adapter
+                    expListView.setAdapter(listAdapter);
+                }
+            }
+        });
+
         return rootView;
+
     }
 
     @Override
@@ -235,6 +221,5 @@ public class DiagnosisSearchFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
 
 }

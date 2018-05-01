@@ -1,12 +1,14 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import static android.content.ContentValues.TAG;
 
 public class UserProfileFragment extends Fragment {
     TextView name, email, gender, birthday;
+    Button setimage;
     private DatabaseReference mDatabase;
 
     public UserProfileFragment() {
@@ -45,11 +48,13 @@ public class UserProfileFragment extends Fragment {
         email = (TextView) rootView.findViewById(R.id.tv_user_email);
         gender = (TextView) rootView.findViewById(R.id.tv_user_gender);
         birthday = (TextView) rootView.findViewById(R.id.tv_user_birthday);
+        setimage = (Button) rootView.findViewById(R.id.set_profile_image);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         final FirebaseUser user = auth.getCurrentUser();
         String userID = user.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
+
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -74,6 +79,14 @@ public class UserProfileFragment extends Fragment {
             }
         };
         mDatabase.addValueEventListener(postListener);
+        setimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),UploadImage.class);
+                startActivity(intent);
+            }
+        });
+
         // Inflate the layout for this fragment
         return rootView;
     }

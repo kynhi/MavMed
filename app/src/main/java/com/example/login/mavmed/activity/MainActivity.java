@@ -5,7 +5,9 @@ package com.example.login.mavmed.activity;
  */
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,11 +18,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.login.mavmed.R;
+import com.example.login.mavmed.data.ImageUploadInfo;
+import com.example.login.mavmed.data.UserData;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import static android.content.ContentValues.TAG;
+import static com.google.android.gms.internal.zzbfq.NULL;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -30,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     // Creating FirebaseAuth object.
     FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
+    ImageView userIcon;
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -38,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -51,12 +68,42 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         drawerFragment.setDrawerListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        final FirebaseUser user = auth.getCurrentUser();
+        String userID = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("image upload").child("imageURL");
+
+        //setContentView(R.layout.fragment_navigation_drawer);
+        RelativeLayout relayout =  findViewById(R.id.nav_header_container);
+        userIcon = (ImageView) relayout.findViewById(R.id.userIC);
+
+        ValueEventListener postListenter = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String url = (String) dataSnapshot.getValue();
+                loadImagefromUrl(url);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(MainActivity.this, "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            }
+        };
+        databaseReference.addValueEventListener(postListenter);
         // display the first navigation drawer view on app launch
         displayView(0);
 
 
     }
-
+    private void loadImagefromUrl(String url){
+            Picasso.get().load(url).into(userIcon);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

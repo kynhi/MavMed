@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeFragment extends Fragment {
     Button logout ;
     Button diagnose;
-    Button medicalRecord, makeAppointment,userProfile;
+    Button medicalRecord, makeAppointment,userProfile, email;
     Button reminders;
 
     private FragmentDrawer drawerFragment; //Fragment
@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment {
         logout = (Button) rootView.findViewById(R.id.Logout);
         reminders = (Button) rootView.findViewById(R.id.reminders);
         medicalRecord = (Button) rootView.findViewById(R.id.MedicalRecord);
+        email = (Button) rootView.findViewById(R.id.email);
         makeAppointment = rootView.findViewById(R.id.MakeAppointment);
         userProfile = rootView.findViewById(R.id.User_profile);
 
@@ -68,6 +69,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -87,6 +89,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -105,6 +108,26 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                // set the toolbar title
+
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
+            }
+        });
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+
+                fragment = new Email();
+                String title = "Send Email";
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 // set the toolbar title
@@ -121,11 +144,9 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
                 // set the toolbar title
-
-
             }
         });
         userProfile.setOnClickListener(new View.OnClickListener() {

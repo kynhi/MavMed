@@ -29,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context,100,intent1,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context).
-                setSmallIcon(R.drawable.doctor).
+                setSmallIcon(R.drawable.diagnosis).
                 setContentIntent(pendingIntent).
                 setContentText("Time to take your medication").
                 setContentTitle("Take Medicine").

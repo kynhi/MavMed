@@ -20,6 +20,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -60,18 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 // Checking EditText is empty or Not.
                 CheckEditTextStatus();
-
                 // Method to check Email is already exists or not.
                 InsertDataIntoFirebase();
-
                 // Empty EditText After done inserting process.
-                EmptyEditTextAfterDataInsert();
-
-
+                //EmptyEditTextAfterDataInsert();
             }
         });
     }
@@ -81,30 +78,24 @@ public class RegisterActivity extends AppCompatActivity {
         // If editText is not empty then this block will executed.
         if(EditTextEmptyHolder == true)
         {
-
-
             UserRegistrationFunction();
-
         }
         // This block will execute if any of the registration EditText is empty.
         else {
-
             // Printing toast message if any of EditText is empty.
             Toast.makeText(RegisterActivity.this,"Please Fill All The Required Fields.", Toast.LENGTH_LONG).show();
-
         }
-
     }
 
     // Empty edittext after done inserting process method.
-    public void EmptyEditTextAfterDataInsert(){
+/*    public void EmptyEditTextAfterDataInsert(){
 
         Email.getText().clear();
         Birthday.getText().clear();
         Password.getText().clear();
         Name.getText().clear();
 
-    }
+    }*/
     // Method to check EditText is empty or Not.
     public void CheckEditTextStatus(){
 
@@ -145,7 +136,6 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Printing toast message after done inserting.
                             Toast.makeText(RegisterActivity.this,"User Registered Successfully, Check Email for Confirmation", Toast.LENGTH_LONG).show();
-
                             FirebaseAuth auth = FirebaseAuth.getInstance();
                             FirebaseUser user = auth.getCurrentUser();
                             user.sendEmailVerification()
@@ -164,18 +154,28 @@ public class RegisterActivity extends AppCompatActivity {
                             String userID = user.getUid();
                             mDatabase = FirebaseDatabase.getInstance().getReference();
                             mDatabase.child("users").child(userID).setValue(newuser);
-//                            mDatabase.child("users").child(userID).child("Email").setValue(EmailHolder);
-//                            mDatabase.child("users").child(userID).child("Password").setValue(PasswordHolder);
-//                            mDatabase.child("users").child(userID).child("Birthday").setValue(BirthdayHolder);
-
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
 
                             // If something goes wrong.
-                            Toast.makeText(RegisterActivity.this, "You already register with the email please try sign in with Email and Password.", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
+//                            Toast.makeText(RegisterActivity.this, "You already register with the email please try sign in with Email and Password.", Toast.LENGTH_LONG).show();
+//                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                            startActivity(intent);
+                            try {
+                                throw task.getException();
+                            } catch(FirebaseAuthWeakPasswordException e) {
+                                Password.setError("Your Password must be at least 8 characters long");
+                                Password.requestFocus();
+                            } catch(FirebaseAuthInvalidCredentialsException e) {
+                                Email.setError("Please Enter a valid Email address");
+                                Email.requestFocus();
+                            } catch(FirebaseAuthUserCollisionException e) {
+                                Email.setError("This user has already existed, please try login");
+                                Email.requestFocus();
+                            } catch(Exception e) {
+                                Log.e(TAG, e.getMessage());
+                            }
                         }
 
                         // Hiding the progress dialog after all task complete.
