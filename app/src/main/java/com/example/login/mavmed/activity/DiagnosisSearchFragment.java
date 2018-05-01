@@ -28,6 +28,8 @@ import java.util.List;
 
 public class DiagnosisSearchFragment extends Fragment {
 
+    /*Hello from Texas!*/
+
     private DatabaseHelper db;
     long id_num;
     String query;
@@ -85,21 +87,48 @@ public class DiagnosisSearchFragment extends Fragment {
 
         if (create_db) {
 
-        /*Add symptoms to the database*/        /*S_ID*/
-            db.insertSymptom("vomiting");       //1
-            db.insertSymptom("cough");          //2
-            db.insertSymptom("runny nose");     //3
-            db.insertSymptom("sore throat");    //4
+        /*Add symptoms to the database*/                /*S_ID*/
+            db.insertSymptom("bloating");           //1
+            db.insertSymptom("diarrhea");           //2
+            db.insertSymptom("cough");              //3
+            db.insertSymptom("headache");           //4
+            db.insertSymptom("nausea");             //5
+            db.insertSymptom("fever");
+            db.insertSymptom("throat irritation");
+            db.insertSymptom("fatigue");
 
                                                 /*D_ID*/
-            db.insertDisease("common cold");    //1
-            db.insertDisease("cancer");         //2
-            db.insertDisease("the flu");        //3
+            db.insertDisease("irritable bowel syndrome");    //1
+            db.insertDisease("lactose intolerance");
+            db.insertDisease("asthma");
+            db.insertDisease("acute sinusitis");
+            db.insertDisease("heartburn");
+            db.insertDisease("influenza (flu)");
+            db.insertDisease("migraine headache");
+            db.insertDisease("viral gastroenteritis");
+            db.insertDisease("motion sickness");
+            db.insertDisease("diverticulitis");
+            db.insertDisease("common cold");
+            db.insertDisease("whooping cough");
+            db.insertDisease("drug allergy");
+            db.insertDisease("iron deficiency anemia");
+            db.insertDisease("hypothyroidism");
+            db.insertDisease("viral pneumonia");
+            db.insertDisease("strep throat");
+            db.insertDisease("appendicitis");
 
             db.insertSymptomToDisease(1, 1);
             db.insertSymptomToDisease(2, 1);
             db.insertSymptomToDisease(1, 2);
-            db.insertSymptomToDisease(1, 3);
+            db.insertSymptomToDisease(2, 2);
+            db.insertSymptomToDisease(3, 3);
+            db.insertSymptomToDisease(3, 4);
+            db.insertSymptomToDisease(4, 4);
+            db.insertSymptomToDisease(5, 5);
+            /*db.insertSymptomToDisease(, 6);
+            db.insertSymptomToDisease(, 6);
+            db.insertSymptomToDisease(, 6);
+            db.insertSymptomToDisease(, 6);*/
 
         }
 
