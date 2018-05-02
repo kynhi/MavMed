@@ -1,7 +1,9 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Build;
@@ -37,6 +39,7 @@ public class DiagnosisSearchFragment extends Fragment {
     List<Row> possible_diseases;
     List<Row> all_symptoms;
     List<String> strings;
+    ArrayList<String> help_text = new ArrayList<>();
     List<Row> symptoms_for_this_disease;
     ArrayList<String> list = new ArrayList<String>();
     ArrayList<String> listItems = new ArrayList<String>();
@@ -73,8 +76,6 @@ public class DiagnosisSearchFragment extends Fragment {
 
         final Context context = this.getContext();
 
-        boolean create_db = false;
-
 //        Button button = (Button) rootView.findViewById(R.id.search_button);
         Button query_add = (Button) rootView.findViewById(R.id.query_add);
         Button search_multi = (Button) rootView.findViewById(R.id.search_multi);
@@ -85,17 +86,18 @@ public class DiagnosisSearchFragment extends Fragment {
         /*Get a new database helper*/
         db = new DatabaseHelper(context);
 
-        if (create_db) {
-
-        /*Add symptoms to the database*/                /*S_ID*/
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        if(!prefs.getBoolean("firstTime", false)) {
+            // run your one time code
+            /*Add symptoms to the database*/                /*S_ID*/
             db.insertSymptom("bloating");           //1
             db.insertSymptom("diarrhea");           //2
             db.insertSymptom("cough");              //3
             db.insertSymptom("headache");           //4
             db.insertSymptom("nausea");             //5
-            db.insertSymptom("fever");
-            db.insertSymptom("throat irritation");
-            db.insertSymptom("fatigue");
+            db.insertSymptom("fever");              //6
+            db.insertSymptom("throat irritation");  //7
+            db.insertSymptom("fatigue");            //8
 
                                                 /*D_ID*/
             db.insertDisease("irritable bowel syndrome");    //1
@@ -125,13 +127,32 @@ public class DiagnosisSearchFragment extends Fragment {
             db.insertSymptomToDisease(3, 4);
             db.insertSymptomToDisease(4, 4);
             db.insertSymptomToDisease(5, 5);
-            /*db.insertSymptomToDisease(, 6);
-            db.insertSymptomToDisease(, 6);
-            db.insertSymptomToDisease(, 6);
-            db.insertSymptomToDisease(, 6);*/
-
+            db.insertSymptomToDisease(2, 6);
+            db.insertSymptomToDisease(3, 6);
+            db.insertSymptomToDisease(4, 6);
+            db.insertSymptomToDisease(6, 6);
+            db.insertSymptomToDisease(4, 7);
+            db.insertSymptomToDisease(2, 8);
+            db.insertSymptomToDisease(5, 8);
+            db.insertSymptomToDisease(5, 9);
+            db.insertSymptomToDisease(2, 10);
+            db.insertSymptomToDisease(3, 11);
+            db.insertSymptomToDisease(6, 11);
+            db.insertSymptomToDisease(7, 11);
+            db.insertSymptomToDisease(3, 12);
+            db.insertSymptomToDisease(5, 13);
+            db.insertSymptomToDisease(8, 13);
+            db.insertSymptomToDisease(8, 14);
+            db.insertSymptomToDisease(8, 15);
+            db.insertSymptomToDisease(6, 16);
+            db.insertSymptomToDisease(6, 17);
+            db.insertSymptomToDisease(7, 17);
+            db.insertSymptomToDisease(5, 18);
+            db.insertSymptomToDisease(6, 18);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.commit();
         }
-
 
 //        query = "vomiting"; //might break without this
 //        possible_diseases = db.getDiseases(query);
@@ -158,15 +179,15 @@ public class DiagnosisSearchFragment extends Fragment {
         symptoms.setAdapter(adapter2);
 
 //        final ArrayAdapter<String> finalAdapter = adapter;
-        /*symptoms.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+        symptoms.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = list.get(position);
-                list.remove(position);
-                finalAdapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "You selected : " + item, Toast.LENGTH_SHORT).show();
+                String item = multi_q.get(position);
+                multi_q.remove(position);
+                adapter2.notifyDataSetChanged();
+                Message.message(getActivity(), item + " removed from symptoms");
             }
-        });*/
+        });
 
         clear_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +196,7 @@ public class DiagnosisSearchFragment extends Fragment {
                 listDataHeader.clear();
                 listDataChild.clear();
                 adapter2.notifyDataSetChanged();
-                Message.message(context, "cleared list");
+                Message.message(context, "All symptoms removed");
 
             }
         });
@@ -185,11 +206,13 @@ public class DiagnosisSearchFragment extends Fragment {
             public void onClick(View view) {
                 multi_q.add(editText.getText().toString().trim().toLowerCase());
                 adapter2.notifyDataSetChanged();
-                for (String s : multi_q) {
+                /*for (String s : multi_q) {
                     Message.message(context, "contains " + s);
-                }
+                }*/
             }
         });
+
+        help_text.add("Please try a different combination of symptoms");
 
         clear_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,6 +231,11 @@ public class DiagnosisSearchFragment extends Fragment {
                     listDataChild.clear();
 
                     possible_diseases = db.getDiseasesMulti(multi_q);
+
+                    if(possible_diseases.isEmpty()){
+                        listDataHeader.add("Sorry, I can't find any diseases related to those symptoms!");
+                        listDataChild.put(listDataHeader.get(0), help_text);
+                    }
 
                     for (Row row : possible_diseases) {    //possible_diseases contains all diseases connected to the query
 
