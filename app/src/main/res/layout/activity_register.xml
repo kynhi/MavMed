@@ -59,6 +59,8 @@
         android:background="@color/textBoxColor"
         android:backgroundTint="@color/wallet_highlighted_text_holo_dark"
         android:gravity="center"
+        android:clickable="true"
+        android:focusable="false"
         android:hint="Enter Date of Birth"
         android:inputType="date"
         android:textColor="@color/textColorPrimary"

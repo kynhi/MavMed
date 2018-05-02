@@ -2,6 +2,7 @@ package com.example.login.mavmed.activity;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -16,13 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.login.mavmed.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -45,12 +50,40 @@ public class Reminder extends Fragment {
 
         Button pick_time = (Button) rootView.findViewById(R.id.button_remind);
         Button cancel = (Button) rootView.findViewById(R.id.alarm_disable);
-        final Button calendar = (Button) rootView.findViewById(R.id.calendar);
+        final Button calendar_button = (Button) rootView.findViewById(R.id.calendar);
         final EditText apptTitle = (EditText) rootView.findViewById(R.id.apptTitle);
         final EditText apptLocation = (EditText) rootView.findViewById(R.id.apptLocation);
+        final EditText apptDate = (EditText) rootView.findViewById(R.id.apptDate);
+        final EditText apptTime = (EditText) rootView.findViewById(R.id.apptTime);
 //        Button set_reminder = (Button) rootView.findViewById(R.id.set_reminder);
-//        final EditText editText = (EditText) rootView.findViewById(R.id.med_name);
 
+        final Calendar calendar = Calendar.getInstance();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                apptDate.setText(sdf.format(calendar.getTime()));
+            }
+        };
+
+        apptDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         String docname = null;
         String docaddress = null;
@@ -92,7 +125,7 @@ public class Reminder extends Fragment {
             }
         });
 
-        calendar.setOnClickListener(new View.OnClickListener() {
+        calendar_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -103,6 +136,14 @@ public class Reminder extends Fragment {
                 calIntent.setData(CalendarContract.Events.CONTENT_URI);
                 calIntent.putExtra(CalendarContract.Events.TITLE, title);
                 calIntent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
+//                Message.message(getContext(), String.valueOf(calendar.get(Calendar.YEAR)) + "/" + String.valueOf(calendar.get(Calendar.MONTH) + 1) + "/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+
+                GregorianCalendar gcal = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                        gcal.getTimeInMillis());
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                        gcal.getTimeInMillis());
+
                 startActivity(calIntent);
             }
         });
