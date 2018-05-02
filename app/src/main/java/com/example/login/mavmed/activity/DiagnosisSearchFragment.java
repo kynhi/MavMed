@@ -37,6 +37,7 @@ public class DiagnosisSearchFragment extends Fragment {
     List<Row> possible_diseases;
     List<Row> all_symptoms;
     List<String> strings;
+    ArrayList<String> help_text = new ArrayList<>();
     List<Row> symptoms_for_this_disease;
     ArrayList<String> list = new ArrayList<String>();
     ArrayList<String> listItems = new ArrayList<String>();
@@ -73,7 +74,7 @@ public class DiagnosisSearchFragment extends Fragment {
 
         final Context context = this.getContext();
 
-        boolean create_db = false;
+        boolean create_db = false; //when rebuilding the database, this must be set to true
 
 //        Button button = (Button) rootView.findViewById(R.id.search_button);
         Button query_add = (Button) rootView.findViewById(R.id.query_add);
@@ -176,15 +177,15 @@ public class DiagnosisSearchFragment extends Fragment {
         symptoms.setAdapter(adapter2);
 
 //        final ArrayAdapter<String> finalAdapter = adapter;
-        /*symptoms.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+        symptoms.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = list.get(position);
-                list.remove(position);
-                finalAdapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "You selected : " + item, Toast.LENGTH_SHORT).show();
+                String item = multi_q.get(position);
+                multi_q.remove(position);
+                adapter2.notifyDataSetChanged();
+                Message.message(getActivity(), item + " removed from symptoms");
             }
-        });*/
+        });
 
         clear_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,7 +194,7 @@ public class DiagnosisSearchFragment extends Fragment {
                 listDataHeader.clear();
                 listDataChild.clear();
                 adapter2.notifyDataSetChanged();
-                Message.message(context, "cleared list");
+                Message.message(context, "All symptoms removed");
 
             }
         });
@@ -203,11 +204,13 @@ public class DiagnosisSearchFragment extends Fragment {
             public void onClick(View view) {
                 multi_q.add(editText.getText().toString().trim().toLowerCase());
                 adapter2.notifyDataSetChanged();
-                for (String s : multi_q) {
+                /*for (String s : multi_q) {
                     Message.message(context, "contains " + s);
-                }
+                }*/
             }
         });
+
+        help_text.add("Please try a different combination of symptoms");
 
         clear_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +229,11 @@ public class DiagnosisSearchFragment extends Fragment {
                     listDataChild.clear();
 
                     possible_diseases = db.getDiseasesMulti(multi_q);
+
+                    if(possible_diseases.isEmpty()){
+                        listDataHeader.add("Sorry, I can't find any diseases related to those symptoms!");
+                        listDataChild.put(listDataHeader.get(0), help_text);
+                    }
 
                     for (Row row : possible_diseases) {    //possible_diseases contains all diseases connected to the query
 
