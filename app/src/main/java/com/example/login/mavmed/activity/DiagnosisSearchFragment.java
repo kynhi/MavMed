@@ -1,7 +1,9 @@
 package com.example.login.mavmed.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Build;
@@ -74,8 +76,6 @@ public class DiagnosisSearchFragment extends Fragment {
 
         final Context context = this.getContext();
 
-        boolean create_db = false; //when rebuilding the database, this must be set to true
-
 //        Button button = (Button) rootView.findViewById(R.id.search_button);
         Button query_add = (Button) rootView.findViewById(R.id.query_add);
         Button search_multi = (Button) rootView.findViewById(R.id.search_multi);
@@ -86,9 +86,10 @@ public class DiagnosisSearchFragment extends Fragment {
         /*Get a new database helper*/
         db = new DatabaseHelper(context);
 
-        if (create_db) {
-
-        /*Add symptoms to the database*/                /*S_ID*/
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        if(!prefs.getBoolean("firstTime", false)) {
+            // run your one time code
+            /*Add symptoms to the database*/                /*S_ID*/
             db.insertSymptom("bloating");           //1
             db.insertSymptom("diarrhea");           //2
             db.insertSymptom("cough");              //3
@@ -148,9 +149,10 @@ public class DiagnosisSearchFragment extends Fragment {
             db.insertSymptomToDisease(7, 17);
             db.insertSymptomToDisease(5, 18);
             db.insertSymptomToDisease(6, 18);
-
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.commit();
         }
-
 
 //        query = "vomiting"; //might break without this
 //        possible_diseases = db.getDiseases(query);

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Row Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Row Name
     private static final String DATABASE_NAME = "mavmed_db";
