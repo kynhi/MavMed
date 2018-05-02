@@ -93,9 +93,9 @@ public class DiagnosisSearchFragment extends Fragment {
             db.insertSymptom("cough");              //3
             db.insertSymptom("headache");           //4
             db.insertSymptom("nausea");             //5
-            db.insertSymptom("fever");
-            db.insertSymptom("throat irritation");
-            db.insertSymptom("fatigue");
+            db.insertSymptom("fever");              //6
+            db.insertSymptom("throat irritation");  //7
+            db.insertSymptom("fatigue");            //8
 
                                                 /*D_ID*/
             db.insertDisease("irritable bowel syndrome");    //1
@@ -125,10 +125,28 @@ public class DiagnosisSearchFragment extends Fragment {
             db.insertSymptomToDisease(3, 4);
             db.insertSymptomToDisease(4, 4);
             db.insertSymptomToDisease(5, 5);
-            /*db.insertSymptomToDisease(, 6);
-            db.insertSymptomToDisease(, 6);
-            db.insertSymptomToDisease(, 6);
-            db.insertSymptomToDisease(, 6);*/
+            db.insertSymptomToDisease(2, 6);
+            db.insertSymptomToDisease(3, 6);
+            db.insertSymptomToDisease(4, 6);
+            db.insertSymptomToDisease(6, 6);
+            db.insertSymptomToDisease(4, 7);
+            db.insertSymptomToDisease(2, 8);
+            db.insertSymptomToDisease(5, 8);
+            db.insertSymptomToDisease(5, 9);
+            db.insertSymptomToDisease(2, 10);
+            db.insertSymptomToDisease(3, 11);
+            db.insertSymptomToDisease(6, 11);
+            db.insertSymptomToDisease(7, 11);
+            db.insertSymptomToDisease(3, 12);
+            db.insertSymptomToDisease(5, 13);
+            db.insertSymptomToDisease(8, 13);
+            db.insertSymptomToDisease(8, 14);
+            db.insertSymptomToDisease(8, 15);
+            db.insertSymptomToDisease(6, 16);
+            db.insertSymptomToDisease(6, 17);
+            db.insertSymptomToDisease(7, 17);
+            db.insertSymptomToDisease(5, 18);
+            db.insertSymptomToDisease(6, 18);
 
         }
 
