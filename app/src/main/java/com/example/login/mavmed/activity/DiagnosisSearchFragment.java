@@ -204,11 +204,14 @@ public class DiagnosisSearchFragment extends Fragment {
         query_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                multi_q.add(editText.getText().toString().trim().toLowerCase());
-                adapter2.notifyDataSetChanged();
-                /*for (String s : multi_q) {
-                    Message.message(context, "contains " + s);
-                }*/
+                String query = editText.getText().toString().trim().toLowerCase();
+                if(!query.isEmpty()){
+                    multi_q.add(query);
+                    adapter2.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(context, "Please enter a symptom to add to the search list", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -261,6 +264,9 @@ public class DiagnosisSearchFragment extends Fragment {
 
                     // setting list adapter
                     expListView.setAdapter(listAdapter);
+                }
+                else{
+                    Toast.makeText(context, "Your symptoms list is empty! Please add some symptoms before pressing search", Toast.LENGTH_LONG).show();
                 }
             }
         });
