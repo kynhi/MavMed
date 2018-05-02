@@ -79,7 +79,7 @@
         android:textColor="@color/textColorPrimary"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter Password"
+        android:hint="Enter a 6-character Password "
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="210dp" />
@@ -125,7 +125,7 @@
         android:layout_above="@+id/back"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="28dp"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/button1"
         android:text="Create New Account "
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="281dp" />
@@ -137,7 +137,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/button1"
         android:text="Back" />
 
 

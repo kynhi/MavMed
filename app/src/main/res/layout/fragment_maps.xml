@@ -33,7 +33,7 @@
         android:layout_below="@+id/tv_doctor_address"
         android:layout_marginStart="13dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/button1"
         android:text="Send to Calendar" />
 
 
@@ -58,7 +58,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="14dp"
         android:onClick="onClick"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/button1"
         android:text="Search Nearby Doctor" />
 
     <Button
@@ -68,6 +68,6 @@
         android:layout_above="@+id/maps"
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/bt_pick_date"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/button1"
         android:text="Call Doctor" />
 </RelativeLayout>

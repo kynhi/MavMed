@@ -36,7 +36,7 @@ import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText Email, Password, Name ,Birthday;
-    Button Register;
+    Button Register, Back;
     String NameHolder, EmailHolder, PasswordHolder, BirthdayHolder,GenderHolder;
     Boolean EditTextEmptyHolder;
     RadioGroup Gender;
@@ -63,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.editPassword);
         Birthday = (EditText) findViewById(R.id.editBirthday);
         Gender = (RadioGroup) findViewById(R.id.radioGroup);
+        Back = (Button) findViewById(R.id.back);
         //LoginDbHelper = new LoginDatabaseHelper(this);
         // Creating object instance.
         firebaseAuth = FirebaseAuth.getInstance();
@@ -80,7 +81,13 @@ public class RegisterActivity extends AppCompatActivity {
                 //EmptyEditTextAfterDataInsert();
             }
         });
-
+        Back.setOnClickListener(new View.OnClickListener() {
+        @Override
+         public void onClick(View view) {
+            Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+        });
         final Calendar calendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -202,7 +209,7 @@ public class RegisterActivity extends AppCompatActivity {
                             try {
                                 throw task.getException();
                             } catch(FirebaseAuthWeakPasswordException e) {
-                                Password.setError("Your Password must be at least 8 characters long");
+                                Password.setError("Your Password must be at least 6 characters long");
                                 Password.requestFocus();
                             } catch(FirebaseAuthInvalidCredentialsException e) {
                                 Email.setError("Please Enter a valid Email address");

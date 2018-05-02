@@ -54,7 +54,7 @@ public class Reminder extends Fragment {
         final EditText apptTitle = (EditText) rootView.findViewById(R.id.apptTitle);
         final EditText apptLocation = (EditText) rootView.findViewById(R.id.apptLocation);
         final EditText apptDate = (EditText) rootView.findViewById(R.id.apptDate);
-        final EditText apptTime = (EditText) rootView.findViewById(R.id.apptTime);
+//        final EditText apptTime = (EditText) rootView.findViewById(R.id.apptTime);
 //        Button set_reminder = (Button) rootView.findViewById(R.id.set_reminder);
 
         final Calendar calendar = Calendar.getInstance();
